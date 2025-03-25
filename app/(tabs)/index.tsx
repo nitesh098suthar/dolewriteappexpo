@@ -10,17 +10,14 @@ import {
 import { useRouter } from "expo-router";
 import useFetch from "@/services/useFetch";
 import { fetchMovies } from "@/services/api";
-import MovieCard from "@/components/movie-card";
+import MovieCard from "@/components/course-card";
 import { useState } from "react";
+import CourseList from "@/components/course-list";
 export default function Index() {
   // const [searchQuery, setSearchQuery] = useState("");
 
   // const router = useRouter();
-  const {
-    data: movies,
-    loading: movieLoading,
-    error: movieError,
-  } = useFetch(() => fetchMovies({ query: "" }));
+
   return (
     <View className="flex-1 bg-white">
       <Image
@@ -46,51 +43,14 @@ export default function Index() {
             Welcome to Dolewrite!
           </Text>
           <Text className="text-xl font-semibold mt-3">
-            An Digital Learning Platform for kids.{" "}
+            A Digital Learning Platform for kids.{" "}
           </Text>
           <Text className="text-xl font-semibold mt-3 text-primary">
-            A New Way to Learn: Courses that Make Learning Fun and Easy
+            A New Way to Learn, A Courses that Make Learning Fun and Easy
           </Text>
         </View>
 
-        {movieLoading ? (
-          <ActivityIndicator
-            size={"large"}
-            color={"#0000ff"}
-            className="mt-10-center"
-          />
-        ) : movieError ? (
-          <Text style={{ color: "black" }}>Error: {movieError?.message}</Text>
-        ) : (
-          <View>
-            {/* <SearchBar
-              onPress={() => router.push("/search")}
-              placeholder="Search for a movie."
-              value={searchQuery}
-              onChangeText={(text: string) => setSearchQuery(text)}
-            /> */}
-            <Text className="capitalize text-2xl mt-8 font-bold text-black mb-3">
-              Your Courses
-            </Text>
-            <>
-              <FlatList
-                data={movies}
-                renderItem={({ item }) => <MovieCard {...item} />}
-                // style={{ flexDirection: "row", overflow: "scroll" }}
-                keyExtractor={(item) => item.id}
-                numColumns={3}
-                columnWrapperStyle={{
-                  justifyContent: "flex-start",
-                  gap: 12,
-                  paddingRight: 5,
-                  marginBottom: 10,
-                }}
-                className="mt-2 pb-32"
-                scrollEnabled={false}
-              />
-            </>
-          </View>
-        )}
+        <CourseList courseName="Your Course" />
       </ScrollView>
     </View>
   );

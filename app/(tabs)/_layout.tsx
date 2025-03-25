@@ -36,22 +36,22 @@ const _layout = () => {
         }}
       />
       <Tabs.Screen
-        name="search"
+        name="course"
         options={{
-          title: "search",
+          title: "course",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} title={"Search"} />
+            <TabIcon focused={focused} title={"Course"} />
           ),
         }}
       />
       <Tabs.Screen
-        name="saved"
+        name="about"
         options={{
-          title: "saved",
+          title: "about",
           headerShown: false,
           tabBarIcon: ({ focused }) => (
-            <TabIcon focused={focused} title={"Saved"} />
+            <TabIcon focused={focused} title={"About"} />
           ),
         }}
       />
@@ -75,8 +75,8 @@ const TabIcon = ({ focused, title }: any) => {
   const iconMap: any = {
     Home: require("@/assets/icons/home.png"),
     Profile: require("@/assets/icons/person.png"),
-    Saved: require("@/assets/icons/save.png"),
-    Search: require("@/assets/icons/search.png"),
+    About: require("@/assets/icons/about.png"),
+    Course: require("@/assets/icons/course.png"),
   };
 
   const iconSource: any = iconMap[title];
