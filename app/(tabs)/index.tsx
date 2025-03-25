@@ -69,7 +69,7 @@ export default function Index() {
               value={searchQuery}
               onChangeText={(text: string) => setSearchQuery(text)}
             /> */}
-            <Text className="capitalize text-xl mt-5 font-bold text-black mb-3">
+            <Text className="capitalize text-2xl mt-8 font-bold text-black mb-3">
               Your Courses
             </Text>
             <>

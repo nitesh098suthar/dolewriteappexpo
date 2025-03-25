@@ -1,6 +1,5 @@
 import { View, Text, ScrollView, Image } from "react-native";
 import React from "react";
-
 interface ProfileInfoProps {
   label: string;
   value?: string | number | null;
@@ -8,18 +7,22 @@ interface ProfileInfoProps {
 
 const ProfileInfo = ({ label, value }: ProfileInfoProps) => (
   <View
-    className="flex-col w-full items-center justify-center mt-5"
+    className=" flex-col w-full items-center justify-center "
     style={{ paddingHorizontal: 40 }}
   >
+    <View
+      className="my-8"
+      style={{ backgroundColor: "#F6F6F6", width: "100%", height: 1 }}
+    ></View>
     <Text
       style={{ textAlign: "center" }}
-      className="text-black font-normal text-sm"
+      className="text-black font-bold text-2xl "
     >
       {label}
     </Text>
     <Text
       style={{ textAlign: "center" }}
-      className="text-black font-bold text-sm mt-2"
+      className="text-black font-normal text-xl "
     >
       {value || "N/A"}
     </Text>
@@ -27,104 +30,60 @@ const ProfileInfo = ({ label, value }: ProfileInfoProps) => (
 );
 
 const Profile = () => {
-  // Static profile data
   const profile = {
-    avatar: "https://example.com/avatar.jpg", // Replace with a real image URL or local asset
-    name: "Nitesh Kumar Suthar",
-    username: "@nitesh098suthar",
-    joinDate: "2020-05-15",
-    bio: "A passionate developer and movie enthusiast. Lover of sci-fi and popcorn.",
-    location: "Jaipur, INDIA",
-    followers: 1200,
-    following: 350,
-    interests: ["Coding", "Movies", "Gaming", "Travel"],
+    id: "2342343",
+    schoolname: "School of the master card, Jaipur",
+    accountType: "Owner",
   };
 
   return (
-    <View className="bg-primary flex-1">
+    <View className="bg-white flex-1">
+      <Image
+        source={require("@/assets/images/bg.png")}
+        className="z-0 absolute w-full"
+        resizeMode="cover"
+        alt="backgound line image"
+      />
       <ScrollView
         contentContainerStyle={{
           paddingBottom: 80,
         }}
       >
-        {/* Profile Avatar */}
         <View className="flex-1 items-center justify-center mt-20">
+          <Text className="text-4xl font-bold my-8">My Profile</Text>
           <View
             style={{
               backgroundColor: "#0f0d23",
               height: 160,
               width: 160,
               borderRadius: "50%",
-              borderColor: "black",
-              borderWidth: 1,
+              borderColor: "#F6F6F6",
+              borderWidth: 2,
             }}
-            className="flex-1 items-center justify-center"
+            className="flex-1 items-center justify-center overflow-hidden"
           >
             <Image
-              source={require("@/assets/icons/person.png")} // Use a real URL or require() for local asset
+              source={require("@/assets/images/girl.jpg")} // Use a real URL or require() for local asset
               resizeMode="cover"
-              className="size-40"
+              className="w-full h-full"
             />
           </View>
         </View>
         <View className="flex-1 items-start justify-center mt-5 px-5">
-          {/* Name and Username */}
           <Text
-            className="text-black font-bold text-xl w-full mx-auto"
-            style={{ textAlign: "center" }}
+            className="font-bold text-2xl"
+            style={{
+              textAlign: "center",
+              width: "100%",
+              marginHorizontal: "auto",
+            }}
           >
-            {profile.name}
+            Subscription Active
           </Text>
-          <View
-            className="flex-1 justify-center flex-row items-center gap-x-1 mt-2"
-            style={{ width: "100%" }}
-          >
-            <Text className="text-black text-sm">{profile.username}</Text>
-            <Text className="text-black text-sm">
-              Joined {new Date(profile.joinDate).getFullYear()}
-            </Text>
-          </View>
-
-          {/* Followers/Following Stats */}
-          <View className="flex-1 items-center justify-center w-full">
-            <View
-              className="flex-row items-center justify-center mt-2"
-              style={{
-                borderWidth: 1,
-                borderColor: "",
-                width: "50%",
-
-                backgroundColor: "#0f0d23",
-                paddingHorizontal: 8,
-                paddingVertical: 4,
-                borderRadius: 8,
-              }}
-            >
-              <Text className="text-black font-bold" style={{ marginRight: 6 }}>
-                {profile.followers}
-              </Text>
-              <Text className="text-black text-sm">Followers</Text>
-              <Text className="text-black text-sm mx-2">{"  "}</Text>
-              <Text className="text-black font-bold" style={{ marginRight: 6 }}>
-                {profile.following}
-              </Text>
-              <Text className="text-black text-sm">Following</Text>
-            </View>
-          </View>
-
-          {/* Bio */}
-          <ProfileInfo label="Bio" value={profile.bio} />
-
-          {/* Location */}
-          <ProfileInfo label="Location" value={profile.location} />
-
-          {/* Interests */}
-          <ProfileInfo
-            label="Interests"
-            value={profile.interests.join(" - ") || "N/A"}
-          />
+          <ProfileInfo label="Your ID" value={profile.id} />
+          <ProfileInfo label="School Name" value={profile.schoolname} />
+          <ProfileInfo label="Account Type" value={profile.accountType} />
         </View>
-        {/* Profile Details */}
       </ScrollView>
     </View>
   );
