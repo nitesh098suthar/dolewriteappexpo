@@ -1,5 +1,12 @@
 import React from "react";
-import { StyleSheet, View, Button, SafeAreaView, Text } from "react-native";
+import {
+  StyleSheet,
+  View,
+  SafeAreaView,
+  Text,
+  Pressable,
+  Image,
+} from "react-native";
 import Animated, {
   useAnimatedStyle,
   useDerivedValue,
@@ -43,7 +50,11 @@ function AccordionItem({
 }
 
 function Item() {
-  return <View style={styles.box} />;
+  return (
+    <View className="">
+      <Text style={{borderWidth:2, borderColor:"red"}}>this is this</Text>
+    </View>
+  );
 }
 
 function Parent({ open }: any) {
@@ -64,11 +75,24 @@ export default function Accordions() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text className="text-2xl" style={{ fontWeight: "bold" }}>
+      <Text
+        className="text-2xl"
+        style={{ fontWeight: "bold", marginBottom: 12 }}
+      >
         FAQs
       </Text>
       <View style={styles.buttonContainer}>
-        <Button onPress={onPress} title="Click me" />
+        <Pressable
+          onPressIn={onPress}
+          className="flex-1 justify-between flex-row"
+          style={{ backgroundColor: "#F6F6F6", padding: 14, borderRadius: 8 }}
+        >
+          <Text className="font-semibold text-lg">1. this is this </Text>
+          <Image
+            source={require("@/assets/icons/chevron.png")}
+            style={{ width: 24, height: 24 }}
+          />
+        </Pressable>
       </View>
 
       <View style={styles.content}>
