@@ -104,7 +104,12 @@ const Lessons = () => {
         {currentVideoUrl && (
           <View style={{ height: 300, borderRadius: 8, overflow: "hidden" }}>
             <WebView
-              source={{ uri: currentVideoUrl }}
+              source={{
+                uri: currentVideoUrl,
+                headers: {
+                  Referer: "https://www.dolewrite.com",
+                },
+              }}
               style={{ flex: 1 }}
               allowsFullscreenVideo={true}
               mediaPlaybackRequiresUserAction={false}
