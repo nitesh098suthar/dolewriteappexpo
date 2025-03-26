@@ -7,12 +7,7 @@ import {
   Text,
   View,
 } from "react-native";
-import { useRouter } from "expo-router";
-import useFetch from "@/services/useFetch";
-import { fetchMovies } from "@/services/api";
-import MovieCard from "@/components/course-card";
-import { useState } from "react";
-import CourseList from "@/components/course-list";
+import PurchasedCourse from "@/components/purchased-course";
 export default function Index() {
   // const [searchQuery, setSearchQuery] = useState("");
 
@@ -30,7 +25,8 @@ export default function Index() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           minHeight: "100%",
-          paddingBottom: 10,
+          paddingBottom: 40,
+          marginBottom: 40,
         }}
         // style={{ flexDirection: "column" }}
       >
@@ -49,8 +45,7 @@ export default function Index() {
             A New Way to Learn, A Courses that Make Learning Fun and Easy
           </Text>
         </View>
-
-        <CourseList courseName="Your Course" />
+          <PurchasedCourse />
       </ScrollView>
     </View>
   );

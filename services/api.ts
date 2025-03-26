@@ -44,3 +44,20 @@ export const fetchMovieDetails = async (movieId: string) => {
     throw error;
   }
 };
+
+
+// ---------------------------------------------
+
+import axios from "axios";
+
+export const vimeoHttpClient = axios.create({
+  baseURL: "https://api.vimeo.com",
+  headers: {
+    Authorization: "Bearer 78a42f1ebeccdc1a9ec6a27c48c8ea35",
+  },
+  params: {
+    sort: 'alphabetical', // Sorting videos alphabetically
+  },
+});
+
+
