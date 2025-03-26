@@ -1,6 +1,7 @@
 import { View, Text, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
 import { vimeoHttpClient } from "@/services/api";
+import { Link } from "expo-router";
 
 const PurchasedCourse = () => {
   const [subjects, setSubjects] = useState([]); // Initialize with an empty array
@@ -52,11 +53,15 @@ const PurchasedCourse = () => {
     };
     fetchSubjects();
   };
-  const renderItem = ({ item }: { item: any }) => (
-    <View>
-      <Text>{item.folder.name}</Text>
-    </View>
-  );
+  const renderItem = ({ item }: { item: any }) => {
+    console.log(item.folder);
+    return (
+      <Link href={`/course/${item.folder.uri.slice(-8)}`}>
+        <Text>{item.folder.name}</Text>
+        {/* <Text>{item.folder.uri.slice(-8)}</Text> */}
+      </Link>
+    );
+  };
   return (
     <View>
       <Text>{loggedInUser.generatedType}</Text>
