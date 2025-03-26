@@ -30,9 +30,9 @@ const Course = () => {
           </Text>
         </View>
         <View>
-          <CourseList courseName="Nursery"  />
-          <CourseList courseName="KG"  />
-          <CourseList courseName="Prep"  />
+          <CourseList courseName="Nursery" folderId="22761499"  />
+          <CourseList courseName="Kg" folderId="22772821"  />
+          <CourseList courseName="Prep" folderId="22772833"  />
         </View>
       </ScrollView>
     </View>

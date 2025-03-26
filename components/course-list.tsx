@@ -1,35 +1,98 @@
-import { View, Text } from "react-native";
-import React from "react";
-import SearchBar from "@/components/SearchBar";
-import { ActivityIndicator, FlatList, Image, ScrollView } from "react-native";
-import { useRouter } from "expo-router";
-import useFetch from "@/services/useFetch";
-import { fetchMovies } from "@/services/api";
-import MovieCard from "@/components/course-card";
-import { useState } from "react";
-const CourseList = ({ courseName }: { courseName: string }) => {
-  const {
-    data: movies,
-    loading: movieLoading,
-    error: movieError,
-  } = useFetch(() => fetchMovies({ query: "" }));
+import { View, Text, ActivityIndicator, FlatList } from "react-native";
+import React, { useEffect, useState } from "react";
+import { vimeoHttpClient } from "@/services/api";
+import { Link } from "expo-router";
+const CourseList = ({
+  courseName,
+  folderId,
+}: {
+  courseName: string;
+  folderId: string;
+}) => {
+  const [subjects, setSubjects] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      setIsLoading(true);
+      setIsError(null);
+
+      try {
+        const {
+          data: { data },
+        } = await vimeoHttpClient.get(`/me/projects/${folderId}/items`);
+        console.log("data in api", data);
+        setSubjects(data);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching videos:", error);
+        setIsError("Error fetching videos.");
+        setIsLoading(false);
+      }
+    };
+
+    fetchCourses();
+  }, [folderId]);
+
+  const renderItem = ({ item }: { item: any }) => {
+    if (item && item.folder && item.folder.name) {
+      return (
+        <Link
+          href="/buy/buycourse"
+          style={{
+            flex: 1,
+            padding: 10,
+            margin: 5,
+            backgroundColor: "#f0f0f0",
+          }}
+        >
+          <Text>{item.folder.name}</Text>
+        </Link>
+      );
+    } else {
+      return (
+        <View
+          style={{
+            flex: 1,
+            padding: 10,
+            margin: 5,
+            backgroundColor: "#f0f0f0",
+          }}
+        >
+          <Text>Item Name Not Available</Text>
+        </View>
+      );
+    }
+  };
+
   return (
     <View>
-      {movieLoading ? (
-        <ActivityIndicator
-          size={"large"}
-          color={"#F97316"}
-          className="mt-10-center"
-        />
-      ) : movieError ? (
-        <Text style={{ color: "black" }}>Error: {movieError?.message}</Text>
+      {isLoading ? (
+        <View style={{ marginTop: 50, alignItems: "center" }}>
+          <ActivityIndicator size="large" color="#F97316" />
+        </View>
+      ) : isError ? (
+        <Text style={{ color: "black", margin: 10 }}>Error: {isError}</Text>
       ) : (
         <View>
           <View
-            className="flex-1 items-center justify-between"
-            style={{ flexDirection: "row", backgroundColor: "" }}
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+              paddingHorizontal: 10,
+              marginTop: 20,
+            }}
           >
-            <Text className="capitalize text-2xl mt-8 font-bold text-black mb-3 ">
+            <Text
+              style={{
+                fontSize: 22,
+                fontWeight: "bold",
+                color: "black",
+                textTransform: "capitalize",
+              }}
+            >
               {courseName}
             </Text>
             <View
@@ -37,28 +100,24 @@ const CourseList = ({ courseName }: { courseName: string }) => {
                 width: "100%",
                 height: 1,
                 backgroundColor: "#F97316",
-                marginTop: 20,
+                marginTop: 10,
                 marginHorizontal: 10,
               }}
-            ></View>
-          </View>
-          <>
-            <FlatList
-              data={movies}
-              renderItem={({ item }) => <MovieCard {...item} />}
-              // style={{ flexDirection: "row", overflow: "scroll" }}
-              keyExtractor={(item) => item.id}
-              numColumns={2}
-              columnWrapperStyle={{
-                justifyContent: "flex-start",
-                gap: 14,
-                paddingRight: 5,
-                marginBottom: 14,
-              }}
-              className="mt-2"
-              scrollEnabled={false}
             />
-          </>
+          </View>
+          <FlatList
+            data={subjects}
+            renderItem={renderItem}
+            numColumns={2}
+            columnWrapperStyle={{
+              justifyContent: "space-around",
+              paddingHorizontal: 5,
+              marginBottom: 10,
+            }}
+            style={{ marginTop: 10 }}
+            scrollEnabled={false}
+            keyExtractor={(item, index) => index.toString()}
+          />
         </View>
       )}
     </View>
