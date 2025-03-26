@@ -57,7 +57,7 @@ const PurchasedCourse = () => {
     console.log(item.folder);
     return (
       <Link href={`/course/${item.folder.uri.slice(-8)}`}>
-        <Text>{item.folder.name}</Text>
+        <Text className="bg-red-600 text-white" style={{padding:10, margin:10}}>{item.folder.name}</Text>
         {/* <Text>{item.folder.uri.slice(-8)}</Text> */}
       </Link>
     );

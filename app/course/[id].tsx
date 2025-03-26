@@ -7,8 +7,9 @@ import {
   ActivityIndicator,
   Linking,
 } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+import { Link, useLocalSearchParams } from "expo-router";
 import { vimeoHttpClient } from "@/services/api";
+import { WebView } from "react-native-webview";
 
 interface VideoData {
   player_embed_url: string;
@@ -89,37 +90,64 @@ const Lessons = () => {
     );
   }
 
+  const videoCallbacks = {
+    play: (data: any) => console.warn("play: ", data),
+    pause: (data: any) => console.warn("pause: ", data),
+    fullscreenchange: (data: any) => console.warn("fullscreenchange: ", data),
+    ended: (data: any) => console.warn("ended: ", data),
+    controlschange: (data: any) => console.warn("controlschange: ", data),
+  };
+
   return (
     <ScrollView style={{ flex: 1, padding: 16 }}>
       <View style={{ marginBottom: 16 }}>
         {currentVideoUrl && (
-          <View style={{ backgroundColor: "#F6F6F6", padding: 16, borderRadius: 8 }}>
-            <Text style={{ fontSize: 20, fontWeight: "bold", marginBottom: 8 }}>
-              {lectureName}
-            </Text>
-            <Text style={{ fontSize: 16 }}>{description?.split("&&&")[0]}</Text>
+          <View style={{ height: 300, borderRadius: 8, overflow: "hidden" }}>
+            <WebView
+              source={{ uri: currentVideoUrl }}
+              style={{ flex: 1 }}
+              allowsFullscreenVideo={true}
+              mediaPlaybackRequiresUserAction={false}
+            />
+            <Text>{lectureName}</Text>
           </View>
         )}
       </View>
 
-      <View style={{ backgroundColor: "#F6F6F6", padding: 16, borderRadius: 8 }}>
+      <View
+        style={{ backgroundColor: "#F6F6F6", padding: 16, borderRadius: 8 }}
+      >
         <Text style={{ fontSize: 18, fontWeight: "bold", marginBottom: 8 }}>
           Lessons
         </Text>
-        <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 8 }}>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            marginBottom: 8,
+          }}
+        >
           <Text style={{ fontWeight: "bold" }}>Mark If Completed</Text>
           <Text style={{ fontWeight: "bold" }}>Assessment</Text>
         </View>
 
         {videos?.map((video, index) => (
-          <View key={video?.uri} style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
+          <View
+            key={video?.uri}
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: 8,
+            }}
+          >
             <TouchableOpacity
               style={[
                 { flex: 1, padding: 12, borderRadius: 8, marginRight: 8 },
                 completedLectures.includes(index)
                   ? { backgroundColor: "green" }
                   : activeVideoIndex === index
-                  ? { backgroundColor: "blue" }
+                  ? { backgroundColor: "#F97316" }
                   : { backgroundColor: "#D9D9D9" },
               ]}
               onPress={() =>
@@ -135,22 +163,33 @@ const Lessons = () => {
                 <TouchableOpacity onPress={() => handleCheckboxClick(index)}>
                   <View
                     style={[
-                      { width: 15, height: 15, borderWidth: 1, borderColor: "black", marginRight: 8 },
-                      completedLectures.includes(index) && { backgroundColor: "green" },
+                      {
+                        width: 15,
+                        height: 15,
+                        borderWidth: 1,
+                        borderColor: "white",
+                        marginRight: 8,
+                      },
+                      completedLectures.includes(index) && {
+                        backgroundColor: "green",
+                      },
                     ]}
                   />
                 </TouchableOpacity>
-                <Text style={{ fontSize: 14 }}>{video?.name}</Text>
+                <Text className="text-white font-bold">{video?.name}</Text>
               </View>
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={{ backgroundColor: "#D9D9D9", padding: 10, borderRadius: 8 }}
+              className="bg-primary"
+              style={{ padding: 10, borderRadius: 8 }}
               onPress={() =>
-                Linking.openURL(video?.description?.split("&&&")[1] || "https://wordwall.net/")
+                Linking.openURL(
+                  video?.description?.split("&&&")[1] || "https://wordwall.net/"
+                )
               }
             >
-              <Text style={{ fontWeight: "bold" }}>Go</Text>
+              <Text className="text-white font-bold">Go</Text>
             </TouchableOpacity>
           </View>
         ))}
