@@ -22,7 +22,7 @@ const ProfileInfo = ({ label, value }: ProfileInfoProps) => (
 const Profile = () => {
   const profile = {
     id: "2342343",
-    schoolname: "School of the master card, Jaipur",
+    schoolname: "School of the Master Card, Jaipur",
     accountType: "Owner",
   };
 
@@ -47,22 +47,6 @@ const Profile = () => {
                 end={{ x: 0, y: 1 }}
                 className="p-6 items-center relative"
               >
-                <Image
-                  source={require("@/assets/images/profile-spiral.png")}
-                  className="absolute top-8 right-10 w-7 h-7"
-                  resizeMode="contain"
-                />
-                <Image
-                  source={require("@/assets/images/profile-big.png")}
-                  className="absolute top-10 left-2 w-24 h-24"
-                  resizeMode="contain"
-                />
-                <Image
-                  source={require("@/assets/images/profile-small.png")}
-                  className="absolute top-64 left-4 w-14 h-14"
-                  resizeMode="contain"
-                />
-
                 <Text className="text-white text-3xl font-bold mt-6 mb-6 text-center">
                   My Profile
                 </Text>
@@ -70,16 +54,6 @@ const Profile = () => {
                   <Image
                     source={require("@/assets/images/profile-kitty.png")}
                     className="w-full h-full rounded-full"
-                    resizeMode="contain"
-                  />
-                  <Image
-                    source={require("@/assets/images/profile-plus.png")}
-                    className="absolute w-4 h-4 right-[-20px] top-10"
-                    resizeMode="contain"
-                  />
-                  <Image
-                    source={require("@/assets/images/profile-plus.png")}
-                    className="absolute w-4 h-4 right-[-72px] top-52"
                     resizeMode="contain"
                   />
                 </View>
@@ -111,6 +85,58 @@ const Profile = () => {
                 </TouchableOpacity>
               </LinearGradient>
             </ScrollView>
+          </View>
+        </View>
+
+        {/* New Section Below Profile Box */}
+        <View className="mt-10 px-5">
+          <Text className="text-2xl font-extrabold mb-2">
+            Need Help?
+          </Text>
+          <Text className="text-lg mb-4">
+            Have questions? Check out our FAQs or contact Customer Support for
+            quick assistance.
+          </Text>
+
+          {/* List Items with Icons */}
+          <View className="space-y-3">
+            <View className="flex-row items-center space-x-3">
+              <Image
+                source={require("@/assets/images/profile-call.png")}
+                className="w-6 h-6"
+                resizeMode="contain"
+              />
+              <Text className="text-md ml-2">+91 98765 43210</Text>
+            </View>
+
+            <View className="flex-row items-center mt-2">
+              <Image
+                source={require("@/assets/images/profile-mail.png")}
+                className="w-6 h-6"
+                resizeMode="contain"
+              />
+              <Text className="text-md ml-2">example@email.com</Text>
+            </View>
+
+            <View className="flex-row items-center mt-2">
+              <Image
+                source={require("@/assets/images/profile-location.png")}
+                className="w-6 h-6"
+                resizeMode="contain"
+              />
+              <Text className="text-md ml-2">
+                Jaipur, Rajasthan, India
+              </Text>
+            </View>
+          </View>
+
+          {/* Profile-Kids Image Below List Items */}
+          <View className="mt-6 flex items-center">
+            <Image
+              source={require("@/assets/images/profile-kids.png")}
+              className="w-[480px] h-[480px]"
+              resizeMode="contain"
+            />
           </View>
         </View>
       </ScrollView>

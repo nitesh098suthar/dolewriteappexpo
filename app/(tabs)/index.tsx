@@ -1,4 +1,4 @@
-import { Image, ScrollView, View } from "react-native";
+import { Image, ScrollView, View, Text } from "react-native";
 import PurchasedCourse from "@/components/purchased-course";
 
 export default function Index() {
@@ -14,13 +14,18 @@ export default function Index() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ minHeight: "100%", paddingBottom: 80 }}
       >
-        <View className="mt-8">
-          {/* Home Banner Image without centering */}
+        <View className="mt-20">
           <Image
             source={require("@/assets/images/home-banner.png")}
             className="w-full h-64"
             resizeMode="contain"
           />
+
+          {/* Heading Below Home Banner */}
+          <Text className="text-2xl font-extrabold mt-4 text-gray-800">
+            Your Courses
+          </Text>
+
           <PurchasedCourse />
         </View>
       </ScrollView>

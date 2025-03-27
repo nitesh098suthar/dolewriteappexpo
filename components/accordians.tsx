@@ -116,7 +116,7 @@ export default function Accordions() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Frequently Asked Questions</Text>
+      <Text style={styles.title}>FAQs</Text>
       <View style={styles.faqList}>
         {FAQData.map((item) => (
           <View key={item.id} style={styles.faqContainer}>

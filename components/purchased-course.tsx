@@ -1,26 +1,26 @@
-import { View, Text, FlatList } from "react-native";
+import { View, Text, FlatList, Image, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from "react";
 import { vimeoHttpClient } from "@/services/api";
 import { Link } from "expo-router";
+import { LinearGradient } from "expo-linear-gradient";
 import SubjectCard from "./subject-card";
 
 const PurchasedCourse = () => {
-  const [subjects, setSubjects] = useState([]); // Initialize with an empty array
-  const [className, setClassName] = useState<any>(null); // Track the selected folder
+  const [subjects, setSubjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const loggedInUser = {
     name: "Nitesh",
     generatedType: "Nursery",
   };
+
   useEffect(() => {
     setIsLoading(true);
-
     const fetchCourses = async () => {
       try {
         const {
           data: { data },
         } = await vimeoHttpClient.get("/me/projects/22772763/items");
-        // console.log(data);
+
         const folder = data.find(
           (folder: any) =>
             folder?.folder?.name?.toLowerCase() ===
@@ -34,8 +34,10 @@ const PurchasedCourse = () => {
         setIsLoading(false);
       }
     };
+
     fetchCourses();
   }, []);
+
   const loadSubjects = (uri: string) => {
     setIsLoading(true);
     const projectId = uri.slice(-8);
@@ -44,7 +46,7 @@ const PurchasedCourse = () => {
         const response = await vimeoHttpClient.get(
           `/me/projects/${projectId}/items`
         );
-        setSubjects(response?.data?.data); // Update with data array
+        setSubjects(response?.data?.data);
         console.log(response.data.data);
         setIsLoading(false);
       } catch (error) {
@@ -52,25 +54,68 @@ const PurchasedCourse = () => {
         setIsLoading(false);
       }
     };
+
     fetchSubjects();
   };
+
   const renderItem = ({ item }: { item: any }) => {
-    console.log(item.folder);
     return (
       <Link href={`/course/${item.folder.uri.slice(-8)}`}>
-        {/* <Text className="bg-red-600 text-white" style={{padding:10, margin:10}}>{item.folder.name}</Text> */}
-        <SubjectCard subjectName = {item.folder.name} />
+        <SubjectCard subjectName={item.folder.name} />
       </Link>
     );
   };
+
   return (
     <View>
-      <Text>{loggedInUser.generatedType}</Text>
-      <FlatList
-        data={subjects}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.folder.resource_key}
-      />
+      {isLoading ? (
+        <View style={{ marginTop: 50, alignItems: "center" }}>
+          <ActivityIndicator size="large" color="#F97316" />
+        </View>
+      ) : (
+        <View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginTop: 16,
+              marginLeft: 0, 
+            }}
+          >
+            <LinearGradient
+              colors={["#D50E12", "#F8BC24"]}
+              start={{ x: 0, y: 0.5 }}
+              end={{ x: 1, y: 0.5 }}
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                paddingVertical: 8,
+                paddingHorizontal: 16,
+                borderRadius: 30,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontWeight: "bold",
+                  color: "white",
+                  textTransform: "capitalize",
+                }}
+              >
+                Nursery
+              </Text>
+            </LinearGradient>
+          </View>
+
+          {/* Course List */}
+          <FlatList
+            data={subjects}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.folder.resource_key}
+            style={{ marginTop: 10 }}
+          />
+        </View>
+      )}
     </View>
   );
 };
