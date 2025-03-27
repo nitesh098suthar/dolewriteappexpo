@@ -1,15 +1,13 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, ScrollView, SafeAreaView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 
-const SubjectCard = () => {
+const SubjectCard = ({ subjectName }: { subjectName: string }) => {
   return (
-    <View className="mt-10">
-      <Text className="text-black text-2xl font-bold">Your Courses</Text>
-
+    <SafeAreaView>
       <View
-        className="mt-4 w-[332px] h-[180px] shadow-lg"
-        style={{ borderRadius: 24 }}
+        className="w-[100%] h-[180px] shadow-lg"
+        style={{ borderRadius: 24, marginVertical: 50 }}
       >
         <LinearGradient
           colors={["#F8AD30", "#F97316"]}
@@ -26,7 +24,7 @@ const SubjectCard = () => {
           />
 
           <Text className="text-white text-2xl font-bold mt-20">
-            Capital Letters (Alphabet)
+            {subjectName.split(",")[0]}
           </Text>
 
           <View className="flex-row items-center justify-between w-full mt-2 px-12">
@@ -36,7 +34,10 @@ const SubjectCard = () => {
                 className="w-4 h-4"
                 resizeMode="contain"
               />
-              <Text className="text-white text-sm ml-2 mr-4">05</Text>
+              <Text className="text-white text-sm ml-2 mr-4">
+                {" "}
+                {subjectName.split(",")[2]}
+              </Text>
             </View>
 
             <View className="flex-row items-center">
@@ -45,7 +46,9 @@ const SubjectCard = () => {
                 className="w-4 h-4"
                 resizeMode="contain"
               />
-              <Text className="text-white text-sm ml-2 mr-4">11h 20m</Text>
+              <Text className="text-white text-sm ml-2 mr-4">
+                {subjectName.split(",")[3]}
+              </Text>
             </View>
 
             <View className="flex-row items-center">
@@ -54,7 +57,9 @@ const SubjectCard = () => {
                 className="w-4 h-4"
                 resizeMode="contain"
               />
-              <Text className="text-white text-sm ml-2">(4.8 Reviews)</Text>
+              <Text className="text-white text-sm ml-2">
+                {subjectName.split(",")[1]}
+              </Text>
             </View>
           </View>
 
@@ -89,7 +94,7 @@ const SubjectCard = () => {
           />
         </LinearGradient>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

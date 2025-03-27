@@ -2,6 +2,7 @@ import { View, Text, ActivityIndicator, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
 import { vimeoHttpClient } from "@/services/api";
 import { Link } from "expo-router";
+import SubjectCard from "./subject-card";
 const CourseList = ({
   courseName,
   folderId,
@@ -44,10 +45,10 @@ const CourseList = ({
             flex: 1,
             padding: 10,
             margin: 5,
-            backgroundColor: "#f0f0f0",
+
           }}
         >
-          <Text>{item.folder.name}</Text>
+          <SubjectCard subjectName={item.folder.name} />
         </Link>
       );
     } else {
@@ -108,12 +109,6 @@ const CourseList = ({
           <FlatList
             data={subjects}
             renderItem={renderItem}
-            numColumns={2}
-            columnWrapperStyle={{
-              justifyContent: "space-around",
-              paddingHorizontal: 5,
-              marginBottom: 10,
-            }}
             style={{ marginTop: 10 }}
             scrollEnabled={false}
             keyExtractor={(item, index) => index.toString()}

@@ -2,6 +2,7 @@ import { View, Text, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
 import { vimeoHttpClient } from "@/services/api";
 import { Link } from "expo-router";
+import SubjectCard from "./subject-card";
 
 const PurchasedCourse = () => {
   const [subjects, setSubjects] = useState([]); // Initialize with an empty array
@@ -57,8 +58,8 @@ const PurchasedCourse = () => {
     console.log(item.folder);
     return (
       <Link href={`/course/${item.folder.uri.slice(-8)}`}>
-        <Text className="bg-red-600 text-white" style={{padding:10, margin:10}}>{item.folder.name}</Text>
-        {/* <Text>{item.folder.uri.slice(-8)}</Text> */}
+        {/* <Text className="bg-red-600 text-white" style={{padding:10, margin:10}}>{item.folder.name}</Text> */}
+        <SubjectCard subjectName = {item.folder.name} />
       </Link>
     );
   };
