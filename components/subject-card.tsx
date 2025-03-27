@@ -6,7 +6,7 @@ const SubjectCard = ({ subjectName }: { subjectName: string }) => {
   return (
     <SafeAreaView>
       <View
-        className="w-[100%] h-[180px] shadow-lg"
+        className="w-[100%] h-[165px] shadow-lg"
         style={{ borderRadius: 24, marginVertical: 50 }}
       >
         <LinearGradient

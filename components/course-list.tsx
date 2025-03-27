@@ -1,8 +1,10 @@
-import { View, Text, ActivityIndicator, FlatList } from "react-native";
+import { View, Text, ActivityIndicator, FlatList, Image } from "react-native";
 import React, { useEffect, useState } from "react";
 import { vimeoHttpClient } from "@/services/api";
 import { Link } from "expo-router";
+import { LinearGradient } from "expo-linear-gradient";
 import SubjectCard from "./subject-card";
+
 const CourseList = ({
   courseName,
   folderId,
@@ -45,7 +47,6 @@ const CourseList = ({
             flex: 1,
             padding: 10,
             margin: 5,
-
           }}
         >
           <SubjectCard subjectName={item.folder.name} />
@@ -81,31 +82,47 @@ const CourseList = ({
             style={{
               flexDirection: "row",
               alignItems: "center",
-              justifyContent: "space-between",
               paddingHorizontal: 10,
               marginTop: 20,
+              left: -10,
             }}
           >
-            <Text
+            <LinearGradient
+              colors={["#D50E12", "#F8BC24"]}
+              start={{ x: 0, y: 0.5 }}
+              end={{ x: 1, y: 0.5 }}
               style={{
-                fontSize: 22,
-                fontWeight: "bold",
-                color: "black",
-                textTransform: "capitalize",
+                flexDirection: "row",
+                alignItems: "center",
+                paddingVertical: 8,
+                paddingHorizontal: 16,
+                borderRadius: 30,
               }}
             >
-              {courseName}
-            </Text>
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontWeight: "bold",
+                  color: "white",
+                  textTransform: "capitalize",
+                }}
+              >
+                {courseName}
+              </Text>
+            </LinearGradient>
+
+            {/* Divider Line Filling the Remaining Width */}
             <View
               style={{
-                width: "100%",
+                flex: 1,
                 height: 1,
                 backgroundColor: "#F97316",
-                marginTop: 10,
-                marginHorizontal: 10,
+                marginLeft: 10,
               }}
             />
           </View>
+
+          {/* Course List */}
           <FlatList
             data={subjects}
             renderItem={renderItem}
