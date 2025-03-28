@@ -29,10 +29,10 @@ const Course = () => {
             A New Way to Learn: Courses that Make Learning Fun and Easy
           </Text>
         </View>
-        <View>  
-          <CourseList courseName="Nursery" folderId="22761499"  />
-          <CourseList courseName="Kg" folderId="22772821"  />
-          <CourseList courseName="Prep" folderId="22772833"  />
+        <View>
+          <CourseList courseName="Nursery" folderId="22761499" />
+          <CourseList courseName="Kg" folderId="22772821" />
+          <CourseList courseName="Prep" folderId="22772833" />
         </View>
       </ScrollView>
     </View>
