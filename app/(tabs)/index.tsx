@@ -18,8 +18,7 @@ export default function Index() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ minHeight: "100%", paddingBottom: 80 }}
       >
-        <View className="mt-20">
-          {/* Login Button with Gradient */}
+        <View className="mt-14">
           <TouchableOpacity
             className="mb-4 self-end"
             onPress={() => router.push("/auth/login")}

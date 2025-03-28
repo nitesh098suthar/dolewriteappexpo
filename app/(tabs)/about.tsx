@@ -1,24 +1,63 @@
-import { View, Text, ScrollView, Image } from "react-native";
-import React from "react";
+import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import { LinearGradient } from "expo-linear-gradient";
 import Accordions from "@/components/accordians";
 
 const About = () => {
+  const [textWidth, setTextWidth] = useState(0);
+
   return (
     <View className="bg-white flex-1">
       <Image
         source={require("@/assets/images/bg.png")}
         className="z-0 absolute w-full"
         resizeMode="cover"
-        alt="backgound line image"
+        alt="background line image"
       />
       <ScrollView
-        contentContainerStyle={{
-          paddingBottom: 80,
-        }}
+        contentContainerStyle={{ paddingBottom: 80 }}
         className="flex-1 px-5"
+        showsVerticalScrollIndicator={false}
       >
+        <View
+          className="mt-20 h-56"
+          style={{ borderRadius: 20, overflow: "hidden" }}
+        >
+          <LinearGradient
+            colors={["#750900", "#FA6D27"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0, y: 1 }}
+            className="rounded-2xl p-6 h-full"
+          >
+            <Image
+              source={require("@/assets/images/about-bubble.png")}
+              className="absolute -top-14 -right-1 w-56 h-56"
+              resizeMode="contain"
+            />
+
+            <Text
+              className="text-white text-xl font-extrabold"
+              onLayout={(event) => setTextWidth(event.nativeEvent.layout.width)}
+            >
+              Welcome to Dolewrite – Making Learning Fun and Engaging!
+            </Text>
+
+            <Text className="text-white text-lg mt-6 w-4/5">
+              We are here to revolutionize kids’ education by blending
+              technology with creativity.
+            </Text>
+
+            {/* Bottom Left Bubble */}
+            <Image
+              source={require("@/assets/images/about-bubble2.png")}
+              className="absolute -bottom-4 -left-3 w-40 h-40"
+              resizeMode="contain"
+            />
+          </LinearGradient>
+        </View>
+
         <View className="mt-10">
-          <Text className="text-4xl font-extrabold mt-14 ">About Us</Text>
+          <Text className="text-3xl font-extrabold">About Us</Text>
           <Text className="text-xl font-semibold mt-3">
             Want to know more about us? Here we've provided more details about
             us.
@@ -27,9 +66,7 @@ const About = () => {
             Dolewrite began with a simple idea: learning should be as fun as
             playtime! We're a team of educators, designers, and dreamers who
             believe kids learn best when they're excited. That's why we built an
-            e-learning app packed with interactive courses. Math puzzles, story
-            adventures, and science experiments, all designed to make kids smile
-            while they grow.
+            e-learning app packed with interactive courses.
           </Text>
           <Image
             source={require("@/assets/images/about-main.png")}
@@ -44,15 +81,13 @@ const About = () => {
           <Text className="text-xl mt-3">
             At Dolewrite, we’re on a mission to make learning a blast for kids
             aged 4-12. We believe every child is a star, and our job is to help
-            them shine brighter with fun, interactive courses they can explore
-            at their own pace. From classrooms to living rooms, we’re here to
-            bring education and imagination together!
+            them shine brighter with fun, interactive courses.
           </Text>
         </View>
 
         <View className="mt-10">
           <Text className="text-3xl font-extrabold">
-            Why Kids Love Dolewrite ?
+            Why Kids Love Dolewrite?
           </Text>
           <View className="mt-3">
             <Text className="text-xl mb-2">
@@ -73,7 +108,7 @@ const About = () => {
               <Text className="font-bold">3</Text>•{" "}
               <Text className="font-bold">Rewards and Recognition : </Text> Kids
               earn badges, points, and special achievements as they master new
-              skills, keeping them motivated and engaged.
+              skills.
             </Text>
           </View>
         </View>
