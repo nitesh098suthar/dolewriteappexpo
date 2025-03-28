@@ -14,7 +14,7 @@ const ProfileInfo = ({ label, value }: ProfileInfoProps) => (
       {label}
     </Text>
     <Text className="text-white/90 text-lg text-center mb-2">
-      {value || "N/A"}
+      {value || "N/A"} 
     </Text>
   </View>
 );
