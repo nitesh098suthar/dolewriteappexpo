@@ -19,7 +19,7 @@ const SubjectCard = ({ subjectName }: { subjectName: string }) => {
         >
           <Image
             source={require("@/assets/images/card-eng.png")}
-            className="absolute top-[-40%] left-44 transform -translate-x-1/2 w-40 h-40"
+            className="absolute top-[-40%] self-center w-40 h-40"
             resizeMode="contain"
           />
 
@@ -65,7 +65,7 @@ const SubjectCard = ({ subjectName }: { subjectName: string }) => {
 
           <Image
             source={require("@/assets/images/card-cross.png")}
-            className="absolute top-2 right-6 w-20 h-20"
+            className="absolute top-2 right-6 w-16 h-16"
             resizeMode="contain"
           />
 
