@@ -1,4 +1,3 @@
-import MovieDetails from "../app/movie/[id]";
 export const TMDB_CONFIG = {
   BASE_URL: "https://api.themoviedb.org/3",
   API_TOKEN: process.env.EXPO_PUBLIC_MOVIE_API_KEY, // Use the token from .env
@@ -56,5 +55,17 @@ export const vimeoHttpClient = axios.create({
   },
   params: {
     sort: "alphabetical", // Sorting videos alphabetically
+  },
+});
+
+
+
+// ------------------------------------------------
+
+
+export const httpClient = axios.create({
+  baseURL: `${process.env.EXPO_PUBLIC_BASE_URL}/api`,
+  headers: {
+    "Content-Type": "application/json",
   },
 });
