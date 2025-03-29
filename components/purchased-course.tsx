@@ -47,7 +47,7 @@ const PurchasedCourse = () => {
           `/me/projects/${projectId}/items`
         );
         setSubjects(response?.data?.data);
-        console.log(response.data.data);
+        // console.log(response.data.data);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching videos:", error);

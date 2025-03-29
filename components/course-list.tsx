@@ -25,7 +25,7 @@ const CourseList = ({
         const {
           data: { data },
         } = await vimeoHttpClient.get(`/me/projects/${folderId}/items`);
-        console.log("data in api", data);
+        // console.log("data in api", data);
         setSubjects(data);
         setIsLoading(false);
       } catch (error) {
