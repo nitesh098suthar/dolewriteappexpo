@@ -9,27 +9,27 @@ const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [loginId, setLoginId] = useState<string>();
   const [loginPassword, setLoginPassword] = useState<string>();
+  const [err, setErr] = useState<string>(""); // Initialize err to an empty string
+
   const loginHandler = async () => {
+    setErr(""); // Reset error state before each login attempt
     console.log("loginId: ", loginId);
     console.log("loginPassword: ", loginPassword);
-
-    const values = {
-      id: loginId,
-      password: loginPassword,
-    };
 
     try {
       const response = await httpClient.post("/user/login", {
         id: loginId,
         password: loginPassword,
       });
+
       console.log("SUCCESS loggedin");
+      console.log("Response data:", response.data); // Log the response data
       return router.navigate("/");
-      // return response.data; // Return the data from the response
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
-        // Pass the whole error object for more detailed handling
+        setErr("Wrong Credentials");
         console.log("FAILED loggedin");
+        console.log("Error response:", error.response); // Log the error response
         throw error;
       }
       throw new Error("An unexpected error occurred");
@@ -38,17 +38,6 @@ const Login = () => {
 
   return (
     <View className="flex-1 bg-white items-center justify-center px-6">
-      {/* <TouchableOpacity
-        className="absolute top-10 left-5"
-        onPress={() => router.push("/")}
-      >
-        <Image
-          source={require("@/assets/images/login-arrow.png")}
-          className="w-6 h-6"
-          resizeMode="contain"
-        />
-      </TouchableOpacity> */}
-
       <Image
         source={require("@/assets/images/login-logo.png")}
         className="w-32 h-32 mb-6"
@@ -76,7 +65,13 @@ const Login = () => {
           />
         </TouchableOpacity>
       </View>
-
+      {err && (
+        <View style={{ width: "100%" }}>
+          <Text className="text-sm text-red-600 pt-2 pl-2">
+            Wrong Credentials
+          </Text>
+        </View>
+      )}
       <TouchableOpacity
         className="bg-[#F97316] w-full py-3 rounded-lg mb-4 items-center mt-6"
         onPress={loginHandler}
