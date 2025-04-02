@@ -12,13 +12,25 @@ export default function RootLayout() {
       />
       <Stack>
         <Stack.Screen
-          name="(tabs)"
+          name="course/[id]"
           options={{
             headerShown: false,
           }}
         />
         <Stack.Screen
-          name="movie/[id]"
+          name="buy/buycourse"
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="maintabs"
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="auth/login"
           options={{
             headerShown: false,
           }}
