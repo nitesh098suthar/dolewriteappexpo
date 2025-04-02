@@ -7,7 +7,7 @@ import {
   ActivityIndicator,
   Linking,
 } from "react-native";
-import { Link, useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 import { vimeoHttpClient } from "@/services/api";
 import { WebView } from "react-native-webview";
 
@@ -90,19 +90,18 @@ const Lessons = () => {
     );
   }
 
-  const videoCallbacks = {
-    play: (data: any) => console.warn("play: ", data),
-    pause: (data: any) => console.warn("pause: ", data),
-    fullscreenchange: (data: any) => console.warn("fullscreenchange: ", data),
-    ended: (data: any) => console.warn("ended: ", data),
-    controlschange: (data: any) => console.warn("controlschange: ", data),
-  };
-
   return (
     <ScrollView style={{ flex: 1, padding: 16 }}>
       <View style={{ marginBottom: 16 }}>
         {currentVideoUrl && (
-          <View style={{ height: 300, borderRadius: 8, overflow: "hidden" }}>
+          <View
+            style={{
+              height: 300,
+              borderRadius: 8,
+              paddingTop: 64,
+              overflow: "hidden",
+            }}
+          >
             <WebView
               source={{
                 uri: currentVideoUrl,
@@ -114,7 +113,16 @@ const Lessons = () => {
               allowsFullscreenVideo={true}
               mediaPlaybackRequiresUserAction={false}
             />
-            <Text>{lectureName}</Text>
+            <Text
+              style={{
+                fontSize: 24,
+                fontWeight: "bold",
+                marginTop: 8,
+                marginBottom: 16,
+              }}
+            >
+              {lectureName.charAt(0).toUpperCase() + lectureName.slice(1)}
+            </Text>
           </View>
         )}
       </View>
@@ -122,7 +130,7 @@ const Lessons = () => {
       <View
         style={{ backgroundColor: "#F6F6F6", padding: 16, borderRadius: 8 }}
       >
-        <Text style={{ fontSize: 18, fontWeight: "bold", marginBottom: 8 }}>
+        <Text style={{ fontSize: 20, fontWeight: "bold", marginBottom: 20 }}>
           Lessons
         </Text>
         <View
@@ -132,8 +140,12 @@ const Lessons = () => {
             marginBottom: 8,
           }}
         >
-          <Text style={{ fontWeight: "bold" }}>Mark If Completed</Text>
-          <Text style={{ fontWeight: "bold" }}>Assessment</Text>
+          <Text style={{ fontSize: 16, marginBottom: 4, fontWeight: "bold" }}>
+            Mark If Completed
+          </Text>
+          <Text style={{ fontSize: 16, marginBottom: 4, fontWeight: "bold" }}>
+            Assessment
+          </Text>
         </View>
 
         {videos?.map((video, index) => (
@@ -146,12 +158,11 @@ const Lessons = () => {
               marginBottom: 8,
             }}
           >
+            {/* Video Title Button */}
             <TouchableOpacity
               style={[
                 { flex: 1, padding: 12, borderRadius: 8, marginRight: 8 },
-                completedLectures.includes(index)
-                  ? { backgroundColor: "green" }
-                  : activeVideoIndex === index
+                activeVideoIndex === index
                   ? { backgroundColor: "#F97316" }
                   : { backgroundColor: "#D9D9D9" },
               ]}
@@ -165,26 +176,38 @@ const Lessons = () => {
               }
             >
               <View style={{ flexDirection: "row", alignItems: "center" }}>
+                {/* Checkbox */}
                 <TouchableOpacity onPress={() => handleCheckboxClick(index)}>
                   <View
-                    style={[
-                      {
-                        width: 15,
-                        height: 15,
-                        borderWidth: 1,
-                        borderColor: "white",
-                        marginRight: 8,
-                      },
-                      completedLectures.includes(index) && {
-                        backgroundColor: "green",
-                      },
-                    ]}
-                  />
+                    style={{
+                      width: 18,
+                      height: 18,
+                      borderWidth: 2,
+                      borderColor: "black",
+                      borderRadius: 4,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginRight: 8,
+                      backgroundColor: completedLectures.includes(index)
+                        ? "transparent"
+                        : "white",
+                    }}
+                  >
+                    {completedLectures.includes(index) && (
+                      <Text style={{ color: "green", fontWeight: "bold" }}>
+                        ✔
+                      </Text>
+                    )}
+                  </View>
                 </TouchableOpacity>
-                <Text className="text-white font-bold">{video?.name}</Text>
+
+                <Text className="text-white font-bold">
+                  {video?.name.charAt(0).toUpperCase() + video?.name.slice(1)}
+                </Text>
               </View>
             </TouchableOpacity>
 
+            {/* Assessment Button */}
             <TouchableOpacity
               className="bg-primary"
               style={{ padding: 10, borderRadius: 8 }}
