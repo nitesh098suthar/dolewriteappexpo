@@ -64,7 +64,7 @@ const Login: React.FC<LoginProps> = () => {
       return;
     }
     try {
-      const response = await httpClient.post("/user/login", {
+      const response = await httpClient.post("/user/loginapp", {
         id: loginId,
         password: loginPassword,
       });
@@ -75,13 +75,15 @@ const Login: React.FC<LoginProps> = () => {
           password: loginPassword,
         })
       );
+      console.log(response, "------------res");
       router.replace("/maintabs/home");
     } catch (error: any) {
+      console.log("error::::::::", error);
       if (axios.isAxiosError(error)) {
         const axiosError = error as AxiosError;
         setErr("Wrong Credentials");
         console.log("FAILED loggedin");
-        console.log("Error response:", axiosError.response);
+        console.log("Error response:", axiosError);
       } else {
         Alert.alert("Login Error", "An unexpected error occurred");
       }
