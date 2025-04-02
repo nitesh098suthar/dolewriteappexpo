@@ -1,6 +1,8 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
+import { useRouter } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface ProfileInfoProps {
   label: string;
@@ -14,16 +16,27 @@ const ProfileInfo = ({ label, value }: ProfileInfoProps) => (
       {label}
     </Text>
     <Text className="text-white/90 text-lg text-center mb-2">
-      {value || "N/A"} 
+      {value || "N/A"}
     </Text>
   </View>
 );
 
 const Profile = () => {
+  const router = useRouter();
   const profile = {
     id: "2342343",
     schoolname: "School of the Master Card, Jaipur",
     accountType: "Owner",
+  };
+
+  const handleLogout = async () => {
+    try {
+      await AsyncStorage.removeItem("userCredentials");
+      router.replace("/auth/login"); // Navigate to login after logout
+    } catch (error) {
+      console.error("Logout error:", error);
+      // Handle logout error (e.g., show an alert)
+    }
   };
 
   return (
@@ -71,7 +84,10 @@ const Profile = () => {
                 <ProfileInfo label="Account Type" value={profile.accountType} />
 
                 <View className="w-full h-[1px] bg-white/20 my-4" />
-                <TouchableOpacity className="mt-6 w-full">
+                <TouchableOpacity
+                  className="mt-6 w-full"
+                  onPress={handleLogout}
+                >
                   <View className="bg-[#F97316] py-3 rounded-full w-full flex-row items-center justify-center">
                     <Image
                       source={require("@/assets/images/profile-icon.png")}
@@ -90,9 +106,7 @@ const Profile = () => {
 
         {/* New Section Below Profile Box */}
         <View className="mt-10 px-5">
-          <Text className="text-2xl font-extrabold mb-2">
-            Need Help?
-          </Text>
+          <Text className="text-2xl font-extrabold mb-2">Need Help?</Text>
           <Text className="text-lg mb-4">
             Have questions? Check out our FAQs or contact Customer Support for
             quick assistance.
@@ -124,9 +138,7 @@ const Profile = () => {
                 className="w-6 h-6"
                 resizeMode="contain"
               />
-              <Text className="text-md ml-2">
-                Jaipur, Rajasthan, India
-              </Text>
+              <Text className="text-md ml-2">Jaipur, Rajasthan, India</Text>
             </View>
           </View>
 

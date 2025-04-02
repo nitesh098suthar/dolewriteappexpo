@@ -1,40 +1,101 @@
-import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
-import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  Alert,
+  ActivityIndicator, // Import ActivityIndicator
+} from "react-native";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { httpClient } from "@/services/api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const Login = () => {
+interface LoginProps {}
+
+const Login: React.FC<LoginProps> = () => {
   const router = useRouter();
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [loginId, setLoginId] = useState<string>();
-  const [loginPassword, setLoginPassword] = useState<string>();
-  const [err, setErr] = useState<string>(""); // Initialize err to an empty string
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+  const [loginId, setLoginId] = useState<string | undefined>(undefined);
+  const [loginPassword, setLoginPassword] = useState<string | undefined>(
+    undefined
+  );
+  const [err, setErr] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true); // Add loading state
+
+  useEffect(() => {
+    const checkLoggedIn = async () => {
+      try {
+        const credentialsString = await AsyncStorage.getItem("userCredentials");
+        if (credentialsString) {
+          const credentials = JSON.parse(credentialsString);
+          const { id, password } = credentials;
+
+          const response = await httpClient.post("/user/validate", {
+            id,
+            password,
+          });
+
+          if (response.data.valid) {
+            router.replace("/maintabs/home");
+          } else {
+            setLoading(false); // Set loading to false only if not logged in
+          }
+        } else {
+          setLoading(false); // Set loading to false only if not logged in
+        }
+      } catch (error) {
+        console.error("Login check error:", error);
+        setLoading(false); // Set loading to false on error
+      }
+    };
+
+    checkLoggedIn();
+  }, []);
 
   const loginHandler = async () => {
-    setErr(""); // Reset error state before each login attempt
-    console.log("loginId: ", loginId);
-    console.log("loginPassword: ", loginPassword);
-
+    setErr("");
+    setLoading(true); //start loading when login handler is called.
+    if (!loginId || !loginPassword) {
+      Alert.alert("Error", "Please enter ID and Password.");
+      setLoading(false); //stop loading if there is an error.
+      return;
+    }
     try {
       const response = await httpClient.post("/user/login", {
         id: loginId,
         password: loginPassword,
       });
-
-      console.log("SUCCESS loggedin");
-      console.log("Response data:", response.data); // Log the response data
-      return router.navigate("/");
+      await AsyncStorage.setItem(
+        "userCredentials",
+        JSON.stringify({
+          id: loginId,
+          password: loginPassword,
+        })
+      );
+      router.replace("/maintabs/home");
     } catch (error: any) {
       if (axios.isAxiosError(error)) {
+        const axiosError = error as AxiosError;
         setErr("Wrong Credentials");
         console.log("FAILED loggedin");
-        console.log("Error response:", error.response); // Log the error response
-        throw error;
+        console.log("Error response:", axiosError.response);
+      } else {
+        Alert.alert("Login Error", "An unexpected error occurred");
       }
-      throw new Error("An unexpected error occurred");
+      setLoading(false); // stop loading if login fails.
     }
   };
+
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
 
   return (
     <View className="flex-1 bg-white items-center justify-center px-6">
