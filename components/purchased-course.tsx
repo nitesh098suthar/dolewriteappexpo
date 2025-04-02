@@ -1,42 +1,62 @@
 import { View, Text, FlatList, Image, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from "react";
-import { vimeoHttpClient } from "@/services/api";
+import { httpClient, vimeoHttpClient } from "@/services/api";
 import { Link } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import SubjectCard from "./subject-card";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
 
 const PurchasedCourse = () => {
   const [subjects, setSubjects] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const loggedInUser = {
-    name: "Nitesh",
-    generatedType: "Nursery",
-  };
+  const [loggedInUser, setLoggedInUser] = useState<any>(null);
 
   useEffect(() => {
-    setIsLoading(true);
-    const fetchCourses = async () => {
+    const fetchUserData = async () => {
       try {
-        const {
-          data: { data },
-        } = await vimeoHttpClient.get("/me/projects/22772763/items");
+        const credentialsString = await AsyncStorage.getItem("userCredentials");
+        if (credentialsString) {
+          const credentials = JSON.parse(credentialsString);
+          const { id } = credentials;
 
-        const folder = data.find(
-          (folder: any) =>
-            folder?.folder?.name?.toLowerCase() ===
-            loggedInUser?.generatedType.toLowerCase()
-        );
-
-        loadSubjects(folder?.folder?.uri);
-        setIsLoading(false);
+          const response = await httpClient.get(`/user/${id}`);
+          setLoggedInUser(response.data.getauth);
+        }
       } catch (error) {
-        console.error("Error fetching videos:", error);
-        setIsLoading(false);
+        console.error("Error fetching user data:", error);
       }
     };
 
-    fetchCourses();
+    fetchUserData();
   }, []);
+
+  useEffect(() => {
+    if (loggedInUser) {
+      setIsLoading(true);
+      const fetchCourses = async () => {
+        try {
+          const {
+            data: { data },
+          } = await vimeoHttpClient.get("/me/projects/22772763/items");
+
+          const folder = data.find(
+            (folder: any) =>
+              folder?.folder?.name?.toLowerCase() ===
+              loggedInUser?.generatedType?.toLowerCase()
+          );
+
+          loadSubjects(folder?.folder?.uri);
+          setIsLoading(false);
+        } catch (error) {
+          console.error("Error fetching videos:", error);
+          setIsLoading(false);
+        }
+      };
+
+      fetchCourses();
+    }
+  }, [loggedInUser]);
 
   const loadSubjects = (uri: string) => {
     setIsLoading(true);
@@ -47,7 +67,6 @@ const PurchasedCourse = () => {
           `/me/projects/${projectId}/items`
         );
         setSubjects(response?.data?.data);
-        // console.log(response.data.data);
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching videos:", error);
@@ -74,38 +93,40 @@ const PurchasedCourse = () => {
         </View>
       ) : (
         <View>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginTop: 16,
-              marginLeft: 0, 
-            }}
-          >
-            <LinearGradient
-              colors={["#D50E12", "#F8BC24"]}
-              start={{ x: 0, y: 0.5 }}
-              end={{ x: 1, y: 0.5 }}
+          {loggedInUser && (
+            <View
               style={{
                 flexDirection: "row",
                 alignItems: "center",
-                paddingVertical: 8,
-                paddingHorizontal: 16,
-                borderRadius: 30,
+                marginTop: 16,
+                marginLeft: 0,
               }}
             >
-              <Text
+              <LinearGradient
+                colors={["#D50E12", "#F8BC24"]}
+                start={{ x: 0, y: 0.5 }}
+                end={{ x: 1, y: 0.5 }}
                 style={{
-                  fontSize: 18,
-                  fontWeight: "bold",
-                  color: "white",
-                  textTransform: "capitalize",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  paddingVertical: 8,
+                  paddingHorizontal: 16,
+                  borderRadius: 30,
                 }}
               >
-                Nursery
-              </Text>
-            </LinearGradient>
-          </View>
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: "bold",
+                    color: "white",
+                    textTransform: "capitalize",
+                  }}
+                >
+                  {loggedInUser.generatedType}
+                </Text>
+              </LinearGradient>
+            </View>
+          )}
 
           {/* Course List */}
           <FlatList
