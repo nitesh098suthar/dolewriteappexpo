@@ -12,24 +12,20 @@ const SubjectCard = ({ subjectName }: { subjectName: string }) => {
     <SafeAreaView>
       <View
         className="w-full flex-row items-center bg-[#f6f6f6] p-6 rounded-2xl mb-14"
-        style={{ height: 170 }} // Slightly increased height for better spacing
+        style={{ height: 170 }}
       >
         <Image
           source={require("@/assets/images/card-img.png")}
-          className="w-40 h-40" // Adjusted size for better fit
+          className="w-40 h-40"
           resizeMode="contain"
         />
 
-        {/* Right Side Content */}
         <View className="flex-1 ml-6">
-          {/* Heading */}
           <Text className="text-xl font-bold text-gray-900">
             {subjectName.split(",")[0]}
           </Text>
 
-          {/* Book & Clock in One Line */}
           <View className="flex-row items-center mt-4">
-            {/* Book Icon & Text */}
             <View className="flex-row items-center mr-8">
               <Image
                 source={require("@/assets/images/card-book.png")}
@@ -42,7 +38,6 @@ const SubjectCard = ({ subjectName }: { subjectName: string }) => {
               </Text>
             </View>
 
-            {/* Clock Icon & Text */}
             <View className="flex-row items-center">
               <Image
                 source={require("@/assets/images/card-clock.png")}
@@ -56,7 +51,6 @@ const SubjectCard = ({ subjectName }: { subjectName: string }) => {
             </View>
           </View>
 
-          {/* Reviews */}
           <View className="flex-row items-center mt-4">
             <Image
               source={require("@/assets/images/card-star.png")}
