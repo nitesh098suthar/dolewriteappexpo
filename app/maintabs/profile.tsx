@@ -1,8 +1,17 @@
-import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  ActivityIndicator, // Import ActivityIndicator
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
+import { httpClient } from "@/services/api";
 
 interface ProfileInfoProps {
   label: string;
@@ -23,11 +32,33 @@ const ProfileInfo = ({ label, value }: ProfileInfoProps) => (
 
 const Profile = () => {
   const router = useRouter();
-  const profile = {
-    id: "2342343",
-    schoolname: "School of the Master Card, Jaipur",
-    accountType: "Owner",
-  };
+  const [profileData, setProfileData] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      try {
+        const credentialsString = await AsyncStorage.getItem("userCredentials");
+        if (credentialsString) {
+          const credentials = JSON.parse(credentialsString);
+          const { id } = credentials;
+
+          const response = await httpClient.get(`/user/${id}`);
+          setProfileData(response.data.getauth);
+          setIsLoading(false);
+        } else {
+          setIsLoading(false);
+          // Handle case where user credentials are not found (e.g., redirect to login)
+        }
+      } catch (error) {
+        console.error("Error fetching profile data:", error);
+        setIsLoading(false);
+        // Handle error (e.g., show error message)
+      }
+    };
+
+    fetchProfileData();
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -38,6 +69,14 @@ const Profile = () => {
       // Handle logout error (e.g., show an alert)
     }
   };
+
+  if (isLoading) {
+    return (
+      <View className="flex-1 justify-center items-center bg-white">
+        <ActivityIndicator size="large" color="#F97316" />
+      </View>
+    );
+  }
 
   return (
     <View className="flex-1 bg-white">
@@ -72,16 +111,19 @@ const Profile = () => {
                 </View>
                 <View className="items-center mb-4">
                   <Text className="text-white text-2xl font-semibold text-center">
-                    Subscription
+                    Subscribed Class
                   </Text>
                   <Text className="text-white/90 text-lg text-center">
-                    Active
+                    {profileData?.generatedType}
                   </Text>
                 </View>
 
-                <ProfileInfo label="Your ID" value={profile.id} />
-                <ProfileInfo label="School Name" value={profile.schoolname} />
-                <ProfileInfo label="Account Type" value={profile.accountType} />
+                <ProfileInfo label="Your ID" value={profileData?.id} />
+                <ProfileInfo
+                  label="School Name"
+                  value={profileData?.schoolName}
+                />
+                <ProfileInfo label="Account Type" value={profileData?.type} />
 
                 <View className="w-full h-[1px] bg-white/20 my-4" />
                 <TouchableOpacity
@@ -106,42 +148,6 @@ const Profile = () => {
 
         {/* New Section Below Profile Box */}
         <View className="mt-10 px-5">
-          <Text className="text-2xl font-extrabold mb-2">Need Help?</Text>
-          <Text className="text-lg mb-4">
-            Have questions? Check out our FAQs or contact Customer Support for
-            quick assistance.
-          </Text>
-
-          {/* List Items with Icons */}
-          <View className="space-y-3">
-            <View className="flex-row items-center space-x-3">
-              <Image
-                source={require("@/assets/images/profile-call.png")}
-                className="w-6 h-6"
-                resizeMode="contain"
-              />
-              <Text className="text-md ml-2">+91 98765 43210</Text>
-            </View>
-
-            <View className="flex-row items-center mt-2">
-              <Image
-                source={require("@/assets/images/profile-mail.png")}
-                className="w-6 h-6"
-                resizeMode="contain"
-              />
-              <Text className="text-md ml-2">example@email.com</Text>
-            </View>
-
-            <View className="flex-row items-center mt-2">
-              <Image
-                source={require("@/assets/images/profile-location.png")}
-                className="w-6 h-6"
-                resizeMode="contain"
-              />
-              <Text className="text-md ml-2">Jaipur, Rajasthan, India</Text>
-            </View>
-          </View>
-
           {/* Profile-Kids Image Below List Items */}
           <View className="mt-6 flex items-center">
             <Image
