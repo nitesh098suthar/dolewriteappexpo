@@ -25,7 +25,7 @@ const BuyCourse = () => {
             borderRadius: 20,
             overflow: "hidden",
           }}
-          className="mb-8" // Added margin to create space below
+          className="mb-4 mt-16" // Added margin to create space below
         >
           <LinearGradient
             colors={["#750900", "#FA6D27"]}
@@ -67,7 +67,7 @@ const BuyCourse = () => {
               access them here with your login credentials.
             </Text>
 
-            <TouchableOpacity className="bg-[#0F172A] px-6 py-3 rounded-lg mt-4 w-36">
+            <TouchableOpacity className="bg-[#0F172A] px-6 py-3 rounded-lg mt-4 w-48">
               <Text className="text-white text-md font-semibold text-center">
                 Purchase Now
               </Text>
@@ -105,9 +105,9 @@ const BuyCourse = () => {
             resizeMode="contain"
           />
           <Text className="text-lg mt-8 px-4 text-center">
-           Discover the best learning experience with wide range of
-            courses tailored to suit your needs. From beginner to advanced
-            levels, we ensure quality education and career growth.
+            Discover the best learning experience with wide range of courses
+            tailored to suit your needs. From beginner to advanced levels, we
+            ensure quality education and career growth.
           </Text>
         </View>
       </ScrollView>
