@@ -102,16 +102,14 @@ const PurchasedCourse = () => {
                 marginLeft: 0,
               }}
             >
-              <LinearGradient
-                colors={["#D50E12", "#F8BC24"]}
-                start={{ x: 0, y: 0.5 }}
-                end={{ x: 1, y: 0.5 }}
+              <View
                 style={{
                   flexDirection: "row",
                   alignItems: "center",
                   paddingVertical: 8,
                   paddingHorizontal: 16,
                   borderRadius: 30,
+                  backgroundColor: "#f97316",
                 }}
               >
                 <Text
@@ -124,7 +122,15 @@ const PurchasedCourse = () => {
                 >
                   {loggedInUser.generatedType}
                 </Text>
-              </LinearGradient>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  height: 1,
+                  backgroundColor: "#F97316",
+                  marginLeft: 10,
+                }}
+              />
             </View>
           )}
 

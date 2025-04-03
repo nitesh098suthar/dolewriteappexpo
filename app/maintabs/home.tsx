@@ -14,7 +14,7 @@ interface Credentials {
 export default function Home() {
   const router = useRouter();
   return (
-    <View className="flex-1 bg-white">
+    <View className="bg-white">
       <Image
         source={require("@/assets/images/bg.png")}
         className="absolute w-full"
@@ -22,26 +22,29 @@ export default function Home() {
         alt="linear gradient background with white lines"
       />
       <ScrollView
-        className="flex-1 px-5"
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ minHeight: "100%", paddingBottom: 80 }}
+        className="px-5 mt-12"
+        contentContainerStyle={{
+          paddingBottom: 80,
+        }}
       >
-        <View className="mt-14">
+        <View
+          style={{
+            width: "100%",
+            aspectRatio: 16 / 9,
+            overflow: "hidden",
+          }}
+        >
           <Image
-            source={require("@/assets/images/home-banner.png")}
-            className="w-full h-64"
-            resizeMode="contain"
+            source={require("@/assets/images/home-box.png")}
+            resizeMode="stretch"
+            style={{ width: "100%", height: "100%" }}
             alt="home page sliding banners"
           />
-          {
-            <TouchableOpacity onPress={() => router.push("/auth/login")}>
-              <Text className="text-2xl font-extrabold mt-4 text-gray-800">
-                Your Courses
-              </Text>
-            </TouchableOpacity>
-          }
-          <PurchasedCourse />
         </View>
+        <Text className="text-2xl font-extrabold mt-4 text-gray-800">
+          Your Courses
+        </Text>
+        <PurchasedCourse />
       </ScrollView>
     </View>
   );

@@ -87,16 +87,14 @@ const CourseList = ({
               left: -10,
             }}
           >
-            <LinearGradient
-              colors={["#D50E12", "#F8BC24"]}
-              start={{ x: 0, y: 0.5 }}
-              end={{ x: 1, y: 0.5 }}
+            <View
               style={{
                 flexDirection: "row",
                 alignItems: "center",
                 paddingVertical: 8,
                 paddingHorizontal: 16,
                 borderRadius: 30,
+                backgroundColor: "#f97316", 
               }}
             >
               <Text
@@ -109,9 +107,8 @@ const CourseList = ({
               >
                 {courseName}
               </Text>
-            </LinearGradient>
+            </View>
 
-            {/* Divider Line Filling the Remaining Width */}
             <View
               style={{
                 flex: 1,

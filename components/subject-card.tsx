@@ -2,8 +2,8 @@ import {
   View,
   Text,
   Image,
-  TouchableOpacity,
   SafeAreaView,
+  TouchableOpacity,
 } from "react-native";
 import React from "react";
 
@@ -11,16 +11,33 @@ const SubjectCard = ({ subjectName }: { subjectName: string }) => {
   return (
     <SafeAreaView>
       <View
-        className="w-full flex-row items-center bg-[#f6f6f6] p-6 rounded-2xl mb-14"
-        style={{ height: 170 }}
+        className="w-full flex-row bg-[#f6f6f6] p-6 rounded-2xl mb-14"
+        style={{ height: 200 }}
       >
-        <Image
-          source={require("@/assets/images/card-img.png")}
-          className="w-40 h-40"
-          resizeMode="contain"
-        />
+        <View style={{ flex: 1 }}>
+          <Image
+            source={require("@/assets/images/card-img.png")}
+            style={{ width: "140%", height: "100%" }}
+            resizeMode="stretch"
+          />
+        </View>
 
-        <View className="flex-1 ml-6">
+        <View style={{ flex: 1, paddingLeft: 56, justifyContent: "center" }}>
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#f97316",
+              paddingVertical: 6,
+              paddingHorizontal: 16,
+              borderRadius: 20,
+              alignSelf: "flex-start",
+              marginBottom: 10, 
+            }}
+          >
+            <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 14 }}>
+              Button Text
+            </Text>
+          </TouchableOpacity>
+
           <Text className="text-xl font-bold text-gray-900">
             {subjectName.split(",")[0]}
           </Text>

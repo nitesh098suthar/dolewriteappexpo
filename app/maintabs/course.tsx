@@ -1,6 +1,5 @@
-import { View, Text, ScrollView, Image } from "react-native";
+import { View, ScrollView, Image, Text } from "react-native";
 import React from "react";
-import { LinearGradient } from "expo-linear-gradient";
 import CourseList from "@/components/course-list";
 
 const Course = () => {
@@ -8,7 +7,7 @@ const Course = () => {
     <View className="bg-white flex-1">
       <Image
         source={require("@/assets/images/bg.png")}
-        className="z-0 absolute w-full"
+        className="absolute w-full"
         resizeMode="cover"
         alt="background line image"
       />
@@ -16,41 +15,25 @@ const Course = () => {
         contentContainerStyle={{
           paddingBottom: 80,
         }}
-        className="flex-1 px-5"
+        className="flex-1 px-5 mt-12"
       >
-        {/* Gradient Box for Course Heading */}
         <View
-          className="mt-20 mb-8 h-56"
-          style={{ borderRadius: 20, overflow: "hidden" }}
+          style={{
+            width: "100%",
+            aspectRatio: 16 / 9,
+            overflow: "hidden",
+          }}
         >
-          <LinearGradient
-            colors={["#750900", "#FA6D27"]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 0, y: 1 }}
-            className="rounded-2xl p-6 h-full"
-          >
-            <Image
-              source={require("@/assets/images/about-bubble.png")}
-              className="absolute -top-14 -right-1 w-56 h-56"
-              resizeMode="contain"
-            />
-            <Text className="text-3xl font-extrabold text-white">
-              Available Courses
-            </Text>
-            <Text className="text-lg font-semibold mt-3 text-white">
-              We've multiple other courses you can purchase according to your
-              choice.
-            </Text>
-            <Text className="text-lg font-semibold mt-3 text-yellow-300">
-              A New Way to Learn: Courses that Make Learning Fun and Easy
-            </Text>
-            <Image
-              source={require("@/assets/images/about-bubble2.png")}
-              className="absolute -bottom-4 -left-3 w-40 h-40"
-              resizeMode="contain"
-            />
-          </LinearGradient>
+          <Image
+            source={require("@/assets/images/course-box.png")}
+            resizeMode="stretch"
+            style={{ width: "100%", height: "100%" }}
+            alt="Course Box Banner"
+          />
         </View>
+
+        {/* Left-Aligned Heading */}
+        <Text className="text-2xl font-extrabold mt-4">All Available Courses</Text>
 
         {/* Course List */}
         <View>
