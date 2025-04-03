@@ -82,15 +82,15 @@ const Profile = () => {
     <View className="flex-1 bg-white">
       <Image
         source={require("@/assets/images/bg.png")}
-        className="absolute w-full h-full"
+        className="absolute w-full"
         resizeMode="cover"
       />
 
       <ScrollView
-        className="flex-1 px-5 py-10"
+        className="flex-1 px-5 mt-12"
         showsVerticalScrollIndicator={false}
       >
-        <View className="items-center justify-center mt-10">
+        <View className="items-center justify-center">
           <View className="w-[100%] rounded-3xl overflow-hidden shadow-lg">
             <ScrollView>
               <LinearGradient
@@ -123,14 +123,12 @@ const Profile = () => {
                   label="School Name"
                   value={profileData?.schoolName}
                 />
-                <ProfileInfo label="Account Type" value={profileData?.type} />
 
-                <View className="w-full h-[1px] bg-white/20 my-4" />
                 <TouchableOpacity
                   className="mt-6 w-full"
                   onPress={handleLogout}
                 >
-                  <View className="bg-[#F97316] py-3 rounded-full w-full flex-row items-center justify-center">
+                  <View className="bg-[#F97316] py-3 rounded-full w-full flex-row items-center justify-center mb-8">
                     <Image
                       source={require("@/assets/images/profile-icon.png")}
                       className="w-6 h-6 mr-2"
@@ -146,15 +144,16 @@ const Profile = () => {
           </View>
         </View>
 
-        {/* New Section Below Profile Box */}
         <View className="mt-10 px-5">
-          {/* Profile-Kids Image Below List Items */}
           <View className="mt-6 flex items-center">
             <Image
               source={require("@/assets/images/profile-kids.png")}
               className="w-[480px] h-[480px]"
               resizeMode="contain"
             />
+          </View>
+          <View className="mt-10 h-20 bg-white p-6 w-full">
+            <Text></Text>
           </View>
         </View>
       </ScrollView>

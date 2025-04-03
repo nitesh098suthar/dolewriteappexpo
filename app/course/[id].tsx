@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   Linking,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage"; // Import AsyncStorage
 import { useLocalSearchParams } from "expo-router";
 import { vimeoHttpClient } from "@/services/api";
 import { WebView } from "react-native-webview";
@@ -56,9 +57,23 @@ const Lessons = () => {
     };
 
     fetchingSubjectData();
+    loadCompletedLectures(); // Load completed lectures from AsyncStorage
   }, [id]);
 
-  const handleCheckboxClick = (index: number) => {
+  // Load completed lectures from AsyncStorage
+  const loadCompletedLectures = async () => {
+    try {
+      const storedLectures = await AsyncStorage.getItem("completedLectures");
+      if (storedLectures) {
+        setCompletedLectures(JSON.parse(storedLectures));
+      }
+    } catch (error) {
+      console.error("Error loading completed lectures:", error);
+    }
+  };
+
+  // Handle checkbox click and persist the state
+  const handleCheckboxClick = async (index: number) => {
     let updatedLectures = [...completedLectures];
 
     if (updatedLectures.includes(index)) {
@@ -68,6 +83,10 @@ const Lessons = () => {
     }
 
     setCompletedLectures(updatedLectures);
+    await AsyncStorage.setItem(
+      "completedLectures",
+      JSON.stringify(updatedLectures)
+    );
   };
 
   const handleVideoTitleClick = (
@@ -182,8 +201,8 @@ const Lessons = () => {
                     style={{
                       width: 18,
                       height: 18,
-                      borderWidth: 2,
-                      borderColor: "black",
+                      borderWidth: 1,
+                      borderColor: "gray",
                       borderRadius: 4,
                       alignItems: "center",
                       justifyContent: "center",

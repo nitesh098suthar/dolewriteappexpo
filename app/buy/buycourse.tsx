@@ -1,10 +1,7 @@
-import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
-import React, { useState } from "react";
-import { LinearGradient } from "expo-linear-gradient";
+import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
+import React from "react";
 
 const BuyCourse = () => {
-  const [textWidth, setTextWidth] = useState(0);
-
   return (
     <View className="flex-1 bg-white">
       <Image
@@ -13,102 +10,103 @@ const BuyCourse = () => {
         resizeMode="cover"
       />
 
-      {/* ScrollView wraps everything to prevent overlap */}
       <ScrollView
-        className="flex-1 px-5"
+        className="flex-1 px-5 mt-12"
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 80, paddingTop: 20 }} // Adjusted spacing
+        contentContainerStyle={{ paddingBottom: 80 }}
       >
-        {/* Gradient Box Inside ScrollView */}
+        {/* Buy Box Image */}
         <View
           style={{
-            borderRadius: 20,
+            width: "100%",
+            aspectRatio: 16 / 9,
             overflow: "hidden",
           }}
-          className="mb-4 mt-16" // Added margin to create space below
         >
-          <LinearGradient
-            colors={["#750900", "#FA6D27"]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 0, y: 1 }}
-            style={{
-              borderRadius: 20,
-              padding: 24,
-              position: "relative",
-            }}
-          >
-            <Image
-              source={require("@/assets/images/buy-lock.png")}
-              className="absolute top-8 right-3 w-32 h-32"
-              resizeMode="contain"
-            />
-
-            <Text
-              className="text-white text-xl font-extrabold text-left"
-              onLayout={(event) => setTextWidth(event.nativeEvent.layout.width)}
-            >
-              Explore Our More Courses
-            </Text>
-
-            <Image
-              source={require("@/assets/images/buy-curve.png")}
-              style={{
-                width: 50,
-                height: 50,
-                position: "absolute",
-                top: 28,
-                left: textWidth - 120,
-              }}
-              resizeMode="contain"
-            />
-
-            <Text className="text-white text-md mt-6 text-left w-4/6">
-              Unlock your learning journey! Purchase courses on our website and
-              access them here with your login credentials.
-            </Text>
-
-            <TouchableOpacity className="bg-[#0F172A] px-6 py-3 rounded-lg mt-4 w-48">
-              <Text className="text-white text-md font-semibold text-center">
-                Purchase Now
-              </Text>
-            </TouchableOpacity>
-          </LinearGradient>
+          <Image
+            source={require("@/assets/images/buy-box.png")}
+            resizeMode="stretch"
+            style={{ width: "100%", height: "100%" }}
+            alt="Buy Course Banner"
+          />
         </View>
 
-        {/* New Section */}
-        <View className="p-5 rounded-lg">
-          <Text className="text-2xl font-extrabold text-left text-gray-900">
-            Why Choose Our Courses?
+        <View className="mt-6">
+          <Text className="text-2xl font-bold text-left text-gray-900">
+            Unlock Exclusive Learning
+          </Text>
+          <Text className="text-2xl font-bold text-left text-gray-900">
+            Content!
+          </Text>
+
+          <Text className="text-lg text-gray-700 mt-2">
+            You’ve clicked on an exclusive learning video that’s part of our
+            premium content! Subscribing to Dolewrite gives your child access to
+            a fun, interactive, and safe learning experience designed
+            specifically for ages 3-6.
+          </Text>
+
+          <Text className="text-2xl font-bold text-left text-gray-900 mt-4">
+            How to Get Access?
+          </Text>
+          <Text className="text-lg text-gray-700 mt-2">
+            Subscribing is simple! Follow these easy steps:
           </Text>
 
           <View className="mt-4">
-            <Text className="text-lg text-gray-800">✔ Expert-Led Lessons</Text>
-            <Text className="text-lg text-gray-800">✔ Lifetime Access</Text>
-            <Text className="text-lg text-gray-800">✔ Interactive Quizzes</Text>
-            <Text className="text-lg text-gray-800">
-              ✔ Certificates on Completion
-            </Text>
+            {[
+              "Visit our website - Dolewrite.com/subscribe",
+              "Choose a subscription plan that fits your needs",
+              "Complete the payment securely",
+              "Enjoy unlimited learning & fun! ",
+              "Subscribing is simple!",
+            ].map((item, index) => (
+              <Text key={index} className="text-lg text-gray-700">
+                {index + 1}. {item}
+              </Text>
+            ))}
           </View>
 
-          <Text className="text-lg text-gray-700 mt-4">
-            Our courses are designed to provide in-depth knowledge and practical
-            experience. Enroll today and take a step forward in your learning
-            journey!
-          </Text>
+          <TouchableOpacity className="mt-6 bg-[#0F172A] py-3 px-6 rounded-xl w-40">
+            <Text className="text-white text-center text-md font-semibold">
+              Subscribe Now
+            </Text>
+          </TouchableOpacity>
         </View>
 
-        {/* About Image and Paragraph */}
-        <View className="mt-10 items-center">
-          <Image
-            source={require("@/assets/images/about-main.png")}
-            className="w-full h-64 rounded-lg"
-            resizeMode="contain"
-          />
-          <Text className="text-lg mt-8 px-4 text-center">
-            Discover the best learning experience with wide range of courses
-            tailored to suit your needs. From beginner to advanced levels, we
-            ensure quality education and career growth.
+        <View className="mt-10">
+          <Text className="text-2xl font-bold text-left text-gray-900">
+            What’s Included in Your Subscription?
           </Text>
+
+          <View className="mt-4">
+            {[
+              "Unlimited Access ",
+              "Interactive Learning",
+              "Safe & Ad-Free",
+              "Personalized Progress",
+              "New Content Weekly",
+            ].map((item, index) => (
+              <View key={index} className="flex-row items-center mb-2">
+                <Image
+                  source={require("@/assets/images/buy-tick.png")}
+                  className="w-5 h-5 mr-2"
+                  resizeMode="contain"
+                />
+                <Text className="text-lg text-gray-700">{item}</Text>
+              </View>
+            ))}
+          </View>
+
+          <Text className="text-xl font-bold text-left text-gray-900 mt-6">
+            Subscribe Now & Give Your Child the Best Start!
+          </Text>
+
+          <TouchableOpacity className="mt-4 bg-[#0F172A] py-3 px-6 rounded-xl w-40">
+            <Text className="text-white text-center text-md font-semibold">
+              Subscribe Now
+            </Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>
