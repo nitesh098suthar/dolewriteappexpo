@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: "bold",
     marginBottom: 16,
-    color: "#333",
+    color: "black",
   },
   faqList: {
     paddingHorizontal: 4,
@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
   questionText: {
     fontSize: 16,
     fontWeight: "600",
-    color: "#333",
+    color: "black",
     flex: 1,
   },
   faqItem: {
@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
   answerText: {
     fontSize: 15,
     lineHeight: 22,
-    color: "#666",
+    color: "#333",
   },
   linkText: {
     color: "#007AFF",
@@ -258,7 +258,7 @@ const styles = StyleSheet.create({
   chevron: {
     width: 20,
     height: 20,
-    tintColor: "#666",
+    tintColor: "black",
   },
   parent: {
     width: "100%",

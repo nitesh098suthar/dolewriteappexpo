@@ -41,14 +41,7 @@ const CourseList = ({
   const renderItem = ({ item }: { item: any }) => {
     if (item && item.folder && item.folder.name) {
       return (
-        <Link
-          href="/buy/buycourse"
-          style={{
-            flex: 1,
-            padding: 10,
-            margin: 5,
-          }}
-        >
+        <Link href="/buy/buycourse">
           <SubjectCard subjectName={item.folder.name} />
         </Link>
       );
@@ -94,12 +87,13 @@ const CourseList = ({
                 paddingVertical: 8,
                 paddingHorizontal: 16,
                 borderRadius: 30,
-                backgroundColor: "#f97316", 
+                backgroundColor: "#f97316",
+                marginBottom:16
               }}
             >
               <Text
                 style={{
-                  fontSize: 18,
+                  fontSize: 16,
                   fontWeight: "bold",
                   color: "white",
                   textTransform: "capitalize",
@@ -119,11 +113,9 @@ const CourseList = ({
             />
           </View>
 
-          {/* Course List */}
           <FlatList
             data={subjects}
             renderItem={renderItem}
-            style={{ marginTop: 10 }}
             scrollEnabled={false}
             keyExtractor={(item, index) => index.toString()}
           />
