@@ -14,7 +14,7 @@ const _layout = () => {
         tabBarStyle: {
           backgroundColor: "#F97316",
           borderRadius: 50,
-          marginHorizontal: 20,
+          marginHorizontal: 18,
           marginBottom: 12,
           height: 52,
           position: "absolute",
@@ -88,7 +88,12 @@ const TabIcon = ({ focused, title }: any) => {
           className="flex-1 justify-center items-center min-h-16 rounded-full min-w-[112px] mt-4 overflow-hidden bg-white"
           style={{ flexDirection: "row" }}
         >
-          <Image source={iconSource} tintColor={"#F97316"} className="" />
+          <Image
+            source={iconSource}
+            tintColor={"#F97316"}
+            style={{ width: 18, height: 18 }}
+            resizeMode="contain"
+          />
           <Text className="text-primary text-base font-semibold ml-2">
             {title}
           </Text>
@@ -99,8 +104,12 @@ const TabIcon = ({ focused, title }: any) => {
   return (
     <>
       <View className="flex-1 justify-center items-center min-h-16 rounded-full min-w-[112px] mt-4 overflow-hidden">
-        <Image source={iconSource} tintColor={"white"} className="size-5" />
-        {/* <Text className="text-[#A8B5DB]">{title}</Text> */}
+        <Image
+          source={iconSource}
+          tintColor={"white"}
+          style={{ width: 18, height: 18 }}
+          resizeMode="contain"
+        />
       </View>
     </>
   );

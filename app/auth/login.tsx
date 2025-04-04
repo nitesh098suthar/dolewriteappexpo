@@ -3,10 +3,10 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Linking,
   Image,
   Alert,
-  ActivityIndicator, 
+  ActivityIndicator,
+  Linking, // Import ActivityIndicator
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
@@ -95,11 +95,14 @@ const Login: React.FC<LoginProps> = () => {
   if (loading) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" />
+        <ActivityIndicator size="large" color="#F97316"/>
       </View>
     );
   }
-
+  const handleSignUpPress = () => {
+    const websiteURL = 'https://www.dolewrite.com/sign-up';
+    Linking.openURL(websiteURL).catch((err) => console.error('An error occurred: ', err));
+  };
   return (
     <View className="flex-1 bg-white items-center justify-center px-6">
       <Image
@@ -149,14 +152,12 @@ const Login: React.FC<LoginProps> = () => {
         <View className="flex-1 h-[1px] bg-gray-300" />
       </View>
 
-      <Text className="mb-14 text-[#9D9FA0]">
-        Don't have an account?{" "}
-        <TouchableOpacity
-          onPress={() => Linking.openURL("https://www.dolewrite.com/")}
-        >
+      <TouchableOpacity onPress={handleSignUpPress}>
+        <Text className="mb-14">
+          <Text className="text-[#9D9FA0]">Don't have an account? </Text>
           <Text className="text-[#F97316] font-bold">Sign up</Text>
-        </TouchableOpacity>
-      </Text>
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
