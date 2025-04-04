@@ -87,7 +87,7 @@ const Profile = () => {
       />
 
       <ScrollView
-        className="flex-1 px-5 mt-12"
+        className="flex-1 px-5 mt-16"
         showsVerticalScrollIndicator={false}
       >
         <View className="items-center justify-center">
@@ -102,12 +102,14 @@ const Profile = () => {
                 <Text className="text-white text-3xl font-bold mt-6 mb-6 text-center">
                   My Profile
                 </Text>
-                <View className="relative w-40 h-40 mb-6">
-                  <Image
-                    source={require("@/assets/images/profile-kitty.png")}
-                    className="w-full h-full rounded-full"
-                    resizeMode="contain"
-                  />
+                <View className="items-center justify-center w-full">
+                  <View className="relative w-40 h-40 mb-6 items-center justify-center">
+                    <Image
+                      source={require("@/assets/images/profile-kitty.png")}
+                      className="w-40 h-40 rounded-full"
+                      resizeMode="contain"
+                    />
+                  </View>
                 </View>
                 <View className="items-center mb-4">
                   <Text className="text-white text-2xl font-semibold text-center">
@@ -128,13 +130,13 @@ const Profile = () => {
                   className="mt-6 w-full items-center"
                   onPress={handleLogout}
                 >
-                  <View className="bg-[#F97316] py-1 rounded-full w-[97px] h-[38px] flex-row items-center justify-center mb-8">
+                  <View className="bg-[#F97316] py-1 px-4 rounded-full w-[118px] h-[45px] flex-row items-center justify-center mb-8">
                     <Image
                       source={require("@/assets/images/profile-icon.png")}
-                      className="w-5 h-5 mr-2"
+                      className="w-5 h-5 mr-2 ml-2"
                       resizeMode="contain"
                     />
-                    <Text className="text-white text-lg font-semibold">
+                    <Text className="text-white text-lg font-semibold mr-2">
                       Log Out
                     </Text>
                   </View>
@@ -145,14 +147,12 @@ const Profile = () => {
         </View>
 
         <View className="mt-10 px-5">
-          <View className="items-center justify-center w-full">
-            <View className="relative w-40 h-40 mb-6 items-center justify-center">
-              <Image
-                source={require("@/assets/images/profile-kitty.png")}
-                className="w-40 h-40 rounded-full"
-                resizeMode="contain"
-              />
-            </View>
+          <View className="mt-6 flex items-center">
+            <Image
+              source={require("@/assets/images/profile-kids.png")}
+              className="w-[480px] h-[480px]"
+              resizeMode="contain"
+            />
           </View>
 
           <View className="mt-10 h-20 bg-white p-6 w-full">

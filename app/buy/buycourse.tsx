@@ -1,7 +1,18 @@
-import { View, Text, Image, ScrollView, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
 import React from "react";
 
 const BuyCourse = () => {
+  const handleSubscribe = () => {
+    Linking.openURL("https://www.dolewrite.com/");
+  };
+
   return (
     <View className="flex-1 bg-white">
       <Image
@@ -11,7 +22,7 @@ const BuyCourse = () => {
       />
 
       <ScrollView
-        className="flex-1 px-5 mt-12"
+        className="flex-1 px-5 mt-16"
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 80 }}
       >
@@ -31,8 +42,8 @@ const BuyCourse = () => {
           />
         </View>
 
-        <View className="mt-6">
-          <Text className="text-2xl font-bold text-left text-gray-900">
+        <View className="mt-8">
+          <Text className="text-2xl font-extrabold text-left text-gray-900">
             Unlock Exclusive Learning
           </Text>
           <Text className="text-2xl font-bold text-left text-gray-900">
@@ -46,36 +57,60 @@ const BuyCourse = () => {
             specifically for ages 3-6.
           </Text>
 
-          <Text className="text-2xl font-bold text-left text-gray-900 mt-4">
+          <Text className="text-2xl font-extrabold text-left text-gray-900 mt-10">
             How to Get Access?
           </Text>
           <Text className="text-lg text-gray-700 mt-2">
             Subscribing is simple! Follow these easy steps:
           </Text>
 
+          {/* Steps List with Clickable Link */}
           <View className="mt-4">
             {[
-              "Visit our website - Dolewrite.com/subscribe",
-              "Choose a subscription plan that fits your needs",
-              "Complete the payment securely",
-              "Enjoy unlimited learning & fun! ",
-              "Subscribing is simple!",
+              {
+                text: "Visit our website - ",
+                link: "Dolewrite.com/subscribe",
+                isLink: true,
+              },
+              { text: "Choose a subscription plan that fits your needs" },
+              { text: "Complete the payment securely" },
+              { text: "Enjoy unlimited learning & fun!" },
+              { text: "Subscribing is simple!" },
             ].map((item, index) => (
               <Text key={index} className="text-lg text-gray-700">
-                {index + 1}. {item}
+                {index + 1}.{" "}
+                {item.isLink ? (
+                  <>
+                    {item.text}
+                    <Text
+                      className="text-blue-500 underline"
+                      onPress={() =>
+                        Linking.openURL("https://www.dolewrite.com/")
+                      }
+                    >
+                      {item.link}
+                    </Text>
+                  </>
+                ) : (
+                  item.text
+                )}
               </Text>
             ))}
           </View>
 
-          <TouchableOpacity className="mt-6 bg-[#0F172A] py-3 px-6 rounded-xl w-40">
-            <Text className="text-white text-center text-md font-semibold">
+          {/* Subscribe Now Button */}
+          <TouchableOpacity
+            className="mt-6 bg-[#0F172A] py-4 px-6 rounded-xl w-48"
+            onPress={handleSubscribe}
+          >
+            <Text className="text-white text-center text-md font-semibold text-nowrap">
               Subscribe Now
             </Text>
           </TouchableOpacity>
         </View>
 
         <View className="mt-10">
-          <Text className="text-2xl font-bold text-left text-gray-900">
+          <Text className="text-2xl font-extrabold text-left text-gray-900">
             What’s Included in Your Subscription?
           </Text>
 
@@ -98,12 +133,16 @@ const BuyCourse = () => {
             ))}
           </View>
 
-          <Text className="text-xl font-bold text-left text-gray-900 mt-6">
+          <Text className="text-2xl font-bold text-left text-gray-900 mt-10">
             Subscribe Now & Give Your Child the Best Start!
           </Text>
 
-          <TouchableOpacity className="mt-4 bg-[#0F172A] py-3 px-6 rounded-xl w-40">
-            <Text className="text-white text-center text-md font-semibold">
+          {/* Subscribe Now Button */}
+          <TouchableOpacity
+            className="mt-6 bg-[#0F172A] py-4 px-6 rounded-xl w-48"
+            onPress={handleSubscribe}
+          >
+            <Text className="text-white text-center text-md font-semibold text-nowrap">
               Subscribe Now
             </Text>
           </TouchableOpacity>
