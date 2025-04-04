@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "my-app",
+    "name": "Dolewrite",
     "slug": "my-app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -15,7 +15,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/dolewrite.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.nitesh098suthar.myapp"
     },
     "web": {
       "bundler": "metro",
@@ -27,7 +28,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/dolewrite.png",
+          "image": "./assets/images/splashScreen.png",
           "imageWidth": 100,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
@@ -36,6 +37,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "1eaf51aa-30e9-4e20-9e30-c757f538c8e4"
+      }
     }
   }
 }
