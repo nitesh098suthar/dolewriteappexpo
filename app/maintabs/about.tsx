@@ -55,8 +55,8 @@ const About = () => {
           <Text className="text-2xl font-extrabold">Our Mission</Text>
           <Text className="text-lg mt-3">
             At Dolewrite, we’re on a mission to make learning a blast for kids
-            aged 4-12. We believe every child is a star, and our job is to help
-            them shine brighter with fun, interactive courses.
+            aged 3 to 6. We believe every child is a star, and our job is to
+            help them shine brighter with fun, interactive courses.
           </Text>
         </View>
 
