@@ -13,7 +13,7 @@ const About = () => {
       />
       <ScrollView
         contentContainerStyle={{ paddingBottom: 80 }}
-        className="flex-1 px-5 mt-12"
+        className="flex-1 px-5 mt-16"
         showsVerticalScrollIndicator={false}
       >
         <View
@@ -79,7 +79,7 @@ const About = () => {
               Each child progresses at their own pace, with content that adapts
               to their unique learning style and interests.
             </Text>
-            <Text className="text-xl mb-2">
+            <Text className="text-xl mb-10">
               <Text className="font-bold">3</Text>•{" "}
               <Text className="font-bold">Rewards and Recognition : </Text> Kids
               earn badges, points, and special achievements as they master new

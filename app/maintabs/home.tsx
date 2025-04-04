@@ -22,7 +22,7 @@ export default function Home() {
         alt="linear gradient background with white lines"
       />
       <ScrollView
-        className="px-5 mt-12"
+        className="px-5 mt-16"
         contentContainerStyle={{
           paddingBottom: 80,
         }}

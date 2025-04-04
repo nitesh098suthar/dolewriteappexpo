@@ -15,7 +15,7 @@ const Course = () => {
         contentContainerStyle={{
           paddingBottom: 80,
         }}
-        className="flex-1 px-5 mt-12"
+        className="flex-1 px-5 mt-16"
       >
         <View
           style={{
