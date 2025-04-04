@@ -1,82 +1,159 @@
-import {
-  View,
-  Text,
-  Image,
-  SafeAreaView,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, Image } from "react-native";
 import React from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const SubjectCard = ({ subjectName }: { subjectName: string }) => {
   return (
     <SafeAreaView>
       <View
-        className="w-full flex-row bg-[#f6f6f6] p-6 rounded-2xl mb-14"
-        style={{ height: 200 }}
+        className="bg-secondary p-3 w-full my-2"
+        style={{ flexDirection: "row", borderRadius: 10 }}
       >
-        <View style={{ flex: 1 }}>
+        <View
+          style={{
+            width: "50%",
+            aspectRatio: 5 / 4,
+            overflow: "hidden",
+            borderRadius: 5,
+          }}
+        >
           <Image
-            source={require("@/assets/images/card-img.png")}
-            style={{ width: "140%", height: "100%" }}
+            source={require("@/assets/images/thumbnails/gen.png")}
             resizeMode="stretch"
+            style={{ width: "100%", height: "100%" }}
+            alt="thumbnails"
           />
         </View>
-
-        <View style={{ flex: 1, paddingLeft: 56, justifyContent: "center" }}>
-          <TouchableOpacity
-            style={{
-              backgroundColor: "#f97316",
-              paddingVertical: 6,
-              paddingHorizontal: 16,
-              borderRadius: 20,
-              alignSelf: "flex-start",
-              marginBottom: 10, 
-            }}
-          >
-            <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 14 }}>
-              Button Text
-            </Text>
-          </TouchableOpacity>
-
-          <Text className="text-xl font-bold text-gray-900">
+        <View className="w-1/2 flex-1 items-start justify-center p-4">
+          <Text className="font-bold text-gray-900">
             {subjectName.split(",")[0]}
           </Text>
-
-          <View className="flex-row items-center mt-4">
-            <View className="flex-row items-center mr-8">
-              <Image
-                source={require("@/assets/images/card-book.png")}
-                className="w-5 h-5"
-                style={{ tintColor: "gray" }}
-                resizeMode="contain"
-              />
-              <Text className="text-gray-600 text-base ml-2">
-                {subjectName.split(",")[2]}
-              </Text>
+          <View
+            style={{
+              flexDirection: "row",
+              gap: 8,
+              alignItems: "center",
+              justifyContent: "center",
+              marginVertical: 12,
+            }}
+          >
+            <View
+              className=""
+              style={{
+                flexDirection: "row",
+                gap: 6,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <View
+                style={{
+                  width: 20,
+                  aspectRatio: 1 / 1,
+                  overflow: "hidden",
+                  borderRadius: "50%",
+                }}
+              >
+                <Image
+                  source={require("@/assets/images/cardIcons/teacher.png")}
+                  resizeMode="stretch"
+                  style={{ width: "100%", height: "100%" }}
+                  alt="thumbnails"
+                />
+              </View>
+              <Text className="text-xs">Linda</Text>
             </View>
-
-            <View className="flex-row items-center">
-              <Image
-                source={require("@/assets/images/card-clock.png")}
-                className="w-5 h-5"
-                style={{ tintColor: "gray" }}
-                resizeMode="contain"
-              />
-              <Text className="text-gray-600 text-base ml-2">
-                {subjectName.split(",")[3]}
+            <View
+              className=""
+              style={{
+                flexDirection: "row",
+                gap: 2,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <View
+                style={{
+                  width: 14,
+                  aspectRatio: 1 / 1,
+                  overflow: "hidden",
+                  borderRadius: "50%",
+                }}
+              >
+                <Image
+                  source={require("@/assets/images/cardIcons/card-star.png")}
+                  resizeMode="stretch"
+                  style={{ width: "100%", height: "100%" }}
+                  alt="thumbnails"
+                />
+              </View>
+              <Text className="text-xs">
+                &#40;{subjectName.split(",")[1]} Reviews&#41;
               </Text>
             </View>
           </View>
-
-          <View className="flex-row items-center mt-4">
-            <Image
-              source={require("@/assets/images/card-star.png")}
-              className="w-5 h-5"
-              resizeMode="contain"
-            />
-            <Text className="text-gray-600 text-base ml-2">
-              {subjectName.split(",")[1]}
-            </Text>
+          <View
+            style={{
+              flexDirection: "row",
+              gap: 8,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <View
+              className=""
+              style={{
+                flexDirection: "row",
+                gap: 6,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <View
+                style={{
+                  width: 14,
+                  aspectRatio: 1 / 1,
+                  overflow: "hidden",
+                }}
+              >
+                <Image
+                  source={require("@/assets/images/cardIcons/card-book.png")}
+                  tintColor={"#F97316"}
+                  resizeMode="stretch"
+                  style={{ width: "100%", height: "100%" }}
+                  alt="thumbnails"
+                />
+              </View>
+              <Text className="text-xs">
+                {subjectName.split(",")[2]} Lectures
+              </Text>
+            </View>
+            <View
+              className=""
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: 6,
+              }}
+            >
+              <View
+                style={{
+                  width: 14,
+                  aspectRatio: 1 / 1,
+                  overflow: "hidden",
+                }}
+              >
+                <Image
+                  source={require("@/assets/images/cardIcons/card-clock.png")}
+                  tintColor={"#F97316"}
+                  resizeMode="stretch"
+                  style={{ width: "100%", height: "100%" }}
+                  alt="thumbnails"
+                />
+              </View>
+              <Text className="text-xs">{subjectName.split(",")[3]} Mins</Text>
+            </View>
           </View>
         </View>
       </View>
