@@ -42,6 +42,20 @@ const BuyCourse = () => {
           />
         </View>
 
+        <Text className="text-2xl font-extrabold text-left text-gray-900 mt-10">
+          Subscribe Now And Give Your Child the Best Start!
+        </Text>
+
+        {/* Subscribe Now Button */}
+        <TouchableOpacity
+          className="mt-6 bg-[#0F172A] py-4 px-6 rounded-xl w-40"
+          onPress={handleSubscribe}
+        >
+          <Text className="text-white text-center text-md font-semibold text-nowrap">
+            Subscribe Now
+          </Text>
+        </TouchableOpacity>
+
         <View className="mt-8">
           <Text className="text-2xl font-extrabold text-left text-gray-900">
             Unlock Exclusive Learning
@@ -98,21 +112,11 @@ const BuyCourse = () => {
             ))}
           </View>
 
-          {/* Subscribe Now Button */}
-          <TouchableOpacity
-            className="mt-6 bg-[#0F172A] py-4 px-6 rounded-xl w-48"
-            onPress={handleSubscribe}
-          >
-            <Text className="text-white text-center text-md font-semibold text-nowrap">
-              Subscribe Now
-            </Text>
-          </TouchableOpacity>
-        </View>
-
         <View className="mt-10">
           <Text className="text-2xl font-extrabold text-left text-gray-900">
             What’s Included in Your Subscription?
           </Text>
+          </View>
 
           <View className="mt-4">
             {[
@@ -132,20 +136,6 @@ const BuyCourse = () => {
               </View>
             ))}
           </View>
-
-          <Text className="text-2xl font-bold text-left text-gray-900 mt-10">
-            Subscribe Now & Give Your Child the Best Start!
-          </Text>
-
-          {/* Subscribe Now Button */}
-          <TouchableOpacity
-            className="mt-6 bg-[#0F172A] py-4 px-6 rounded-xl w-48"
-            onPress={handleSubscribe}
-          >
-            <Text className="text-white text-center text-md font-semibold text-nowrap">
-              Subscribe Now
-            </Text>
-          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>
