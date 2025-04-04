@@ -6,7 +6,7 @@ const SubjectCard = ({ subjectName }: { subjectName: string }) => {
   return (
     <SafeAreaView>
       <View
-        className="bg-secondary p-3 w-full my-2"
+        className="bg-secondary p-3 w-full mb-4"
         style={{ flexDirection: "row", borderRadius: 10 }}
       >
         <View

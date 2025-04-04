@@ -79,7 +79,10 @@ const PurchasedCourse = () => {
 
   const renderItem = ({ item }: { item: any }) => {
     return (
-      <Link href={`/course/${item.folder.uri.slice(-8)}`}>
+      <Link
+        href={`/course/${item.folder.uri.slice(-8)}`}
+      
+      >
         <SubjectCard subjectName={item.folder.name} />
       </Link>
     );
@@ -107,7 +110,6 @@ const PurchasedCourse = () => {
                   flexDirection: "row",
                   alignItems: "center",
                   paddingVertical: 8,
-                  marginBottom: 6,
                   paddingHorizontal: 16,
                   borderRadius: 30,
                   backgroundColor: "#f97316",
@@ -115,7 +117,7 @@ const PurchasedCourse = () => {
               >
                 <Text
                   style={{
-                    fontSize: 18,
+                    fontSize: 16,
                     fontWeight: "bold",
                     color: "white",
                     textTransform: "capitalize",
@@ -140,7 +142,7 @@ const PurchasedCourse = () => {
             data={subjects}
             renderItem={renderItem}
             keyExtractor={(item) => item.folder.resource_key}
-            style={{ marginTop: 10 }}
+            style={{ marginTop: 16 }}
           />
         </View>
       )}

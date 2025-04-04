@@ -41,7 +41,7 @@ export default function Home() {
             alt="home page sliding banners"
           />
         </View>
-        <Text className="text-2xl font-extrabold mt-4 text-gray-800">
+        <Text className="text-2xl font-extrabold mt-4 text-black">
           Your Courses
         </Text>
         <PurchasedCourse />
