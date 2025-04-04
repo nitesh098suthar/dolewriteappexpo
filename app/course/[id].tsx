@@ -8,7 +8,7 @@ import {
   Linking,
   Image,
 } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage"; // Import AsyncStorage
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useLocalSearchParams } from "expo-router";
 import { vimeoHttpClient } from "@/services/api";
 import { WebView } from "react-native-webview";
@@ -30,6 +30,8 @@ const Lessons = () => {
   const [description, setDescription] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const storageKey = `completedLectures_${id}`;
+
   useEffect(() => {
     const fetchingSubjectData = async () => {
       try {
@@ -50,6 +52,7 @@ const Lessons = () => {
           setLectureName(videoData[0]?.name || "");
           setDescription(videoData[0]?.description || "");
         }
+
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching videos:", error);
@@ -58,13 +61,12 @@ const Lessons = () => {
     };
 
     fetchingSubjectData();
-    loadCompletedLectures(); // Load completed lectures from AsyncStorage
+    loadCompletedLectures(); // Load completed lectures for this subject
   }, [id]);
 
-  // Load completed lectures from AsyncStorage
   const loadCompletedLectures = async () => {
     try {
-      const storedLectures = await AsyncStorage.getItem("completedLectures");
+      const storedLectures = await AsyncStorage.getItem(storageKey);
       if (storedLectures) {
         setCompletedLectures(JSON.parse(storedLectures));
       }
@@ -73,7 +75,6 @@ const Lessons = () => {
     }
   };
 
-  // Handle checkbox click and persist the state
   const handleCheckboxClick = async (index: number) => {
     let updatedLectures = [...completedLectures];
 
@@ -84,10 +85,7 @@ const Lessons = () => {
     }
 
     setCompletedLectures(updatedLectures);
-    await AsyncStorage.setItem(
-      "completedLectures",
-      JSON.stringify(updatedLectures)
-    );
+    await AsyncStorage.setItem(storageKey, JSON.stringify(updatedLectures));
   };
 
   const handleVideoTitleClick = (
@@ -143,7 +141,6 @@ const Lessons = () => {
                 style={{
                   fontSize: 18,
                   fontWeight: "bold",
-
                   marginBottom: 12,
                 }}
               >
