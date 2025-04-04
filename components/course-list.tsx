@@ -1,8 +1,7 @@
-import { View, Text, ActivityIndicator, FlatList, Image } from "react-native";
+import { View, Text, ActivityIndicator, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
 import { vimeoHttpClient } from "@/services/api";
 import { Link } from "expo-router";
-import { LinearGradient } from "expo-linear-gradient";
 import SubjectCard from "./subject-card";
 
 const CourseList = ({
@@ -25,7 +24,6 @@ const CourseList = ({
         const {
           data: { data },
         } = await vimeoHttpClient.get(`/me/projects/${folderId}/items`);
-        // console.log("data in api", data);
         setSubjects(data);
         setIsLoading(false);
       } catch (error) {
@@ -80,6 +78,7 @@ const CourseList = ({
               left: -10,
             }}
           >
+            {/* Course Name Box */}
             <View
               style={{
                 flexDirection: "row",
@@ -88,7 +87,7 @@ const CourseList = ({
                 paddingHorizontal: 16,
                 borderRadius: 30,
                 backgroundColor: "#f97316",
-                marginBottom:16
+                marginBottom: 16,
               }}
             >
               <Text
@@ -103,12 +102,15 @@ const CourseList = ({
               </Text>
             </View>
 
+            {/* Vertically centered line */}
             <View
               style={{
                 flex: 1,
                 height: 1,
                 backgroundColor: "#F97316",
                 marginLeft: 10,
+                alignSelf: "center",
+                marginBottom: 16,
               }}
             />
           </View>
