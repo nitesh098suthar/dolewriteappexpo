@@ -18,7 +18,11 @@ const SubjectCard = ({ subjectName }: { subjectName: string }) => {
           }}
         >
           <Image
-            source={require("@/assets/images/thumbnails/gen.png")}
+            source={{
+              uri: `https://dollewrite.s3.ap-southeast-2.amazonaws.com/d/${
+                subjectName.split(",")[4]
+              }.png`,
+            }}
             resizeMode="stretch"
             style={{ width: "100%", height: "100%" }}
             alt="thumbnails"
