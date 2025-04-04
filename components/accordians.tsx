@@ -17,33 +17,32 @@ import Animated, {
 const FAQData = [
   {
     id: 1,
-    question: "Who can use Dolewrite?",
+    question: "1. Who can use Dolewrite?",
     answer:
       "Dolewrite is designed for children aged 3-12 years old. Our content is carefully curated and age-appropriate, with different difficulty levels to match your child's learning stage.",
   },
   {
     id: 2,
-    question: "How does the learning path personalization work?",
+    question: "2. How does the learning path personalization work?",
     answer:
       "Our system observes your child's learning patterns, pace, and preferences. It then automatically adjusts the difficulty, suggests relevant content, and creates a customized learning journey that keeps them engaged and challenged at the right level.",
   },
   {
     id: 3,
-    question: "Can parents track their child's progress?",
+    question: "3. Can we track child's progress?",
     answer:
       "Yes! Parents have access to a detailed dashboard showing their child's learning progress, time spent on different subjects, skill improvements, and achievements. You can also receive weekly progress reports via email.",
   },
   {
     id: 4,
-    question: "Is internet connection required to use Dolewrite?",
-    answer:
-      "Yes, internet connection is required for the best experience.",
+    question: "4. Is internet connection required ?",
+    answer: "Yes, internet connection is required for the best experience.",
   },
   {
     id: 5,
-    question: "What subjects are covered in Dolewrite?",
+    question: "5. What subjects are covered ?",
     answer:
-      "Dolewrite covers core subjects including Mathematics, English, Hindi, Environmental Science."
+      "Dolewrite covers core subjects including Mathematics, English, Hindi, Environmental Science.",
   },
 ];
 
@@ -128,7 +127,6 @@ export default function Accordions() {
               ]}
             >
               <View style={styles.questionContent}>
-                <Text style={styles.listNumber}>{item.id}.</Text>
                 <Text style={styles.questionText}>{item.question}</Text>
                 <Image
                   source={require("@/assets/icons/chevron.png")}
@@ -165,6 +163,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: "bold",
     marginBottom: 20,
+    marginTop: 10,
     color: "#333",
   },
   faqList: {
@@ -187,12 +186,6 @@ const styles = StyleSheet.create({
   },
   questionButtonPressed: {
     opacity: 0.7,
-  },
-  listNumber: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: "#333",
-    marginRight: 8,
   },
   questionText: {
     fontSize: 16,

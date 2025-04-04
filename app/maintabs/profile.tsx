@@ -125,13 +125,13 @@ const Profile = () => {
                 />
 
                 <TouchableOpacity
-                  className="mt-6 w-full"
+                  className="mt-6 w-full items-center"
                   onPress={handleLogout}
                 >
-                  <View className="bg-[#F97316] py-3 rounded-full w-full flex-row items-center justify-center mb-8">
+                  <View className="bg-[#F97316] py-1 rounded-full w-[97px] h-[38px] flex-row items-center justify-center mb-8">
                     <Image
                       source={require("@/assets/images/profile-icon.png")}
-                      className="w-6 h-6 mr-2"
+                      className="w-5 h-5 mr-2"
                       resizeMode="contain"
                     />
                     <Text className="text-white text-lg font-semibold">
@@ -145,13 +145,16 @@ const Profile = () => {
         </View>
 
         <View className="mt-10 px-5">
-          <View className="mt-6 flex items-center">
-            <Image
-              source={require("@/assets/images/profile-kids.png")}
-              className="w-[480px] h-[480px]"
-              resizeMode="contain"
-            />
+          <View className="items-center justify-center w-full">
+            <View className="relative w-40 h-40 mb-6 items-center justify-center">
+              <Image
+                source={require("@/assets/images/profile-kitty.png")}
+                className="w-40 h-40 rounded-full"
+                resizeMode="contain"
+              />
+            </View>
           </View>
+
           <View className="mt-10 h-20 bg-white p-6 w-full">
             <Text></Text>
           </View>
