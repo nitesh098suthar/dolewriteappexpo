@@ -107,6 +107,7 @@ const PurchasedCourse = () => {
                   flexDirection: "row",
                   alignItems: "center",
                   paddingVertical: 8,
+                  marginBottom: 6,
                   paddingHorizontal: 16,
                   borderRadius: 30,
                   backgroundColor: "#f97316",
