@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Linking,
+  Image,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage"; // Import AsyncStorage
 import { useLocalSearchParams } from "expo-router";
@@ -110,6 +111,12 @@ const Lessons = () => {
   }
 
   return (
+    <View className="flex-1 bg-white">
+          <Image
+            source={require("@/assets/images/bg.png")}
+            className="absolute w-full"
+            resizeMode="cover"
+          />
     <ScrollView style={{ flex: 1, padding: 16 }}>
       <View style={{ marginBottom: 16 }}>
         {currentVideoUrl && (
@@ -242,6 +249,7 @@ const Lessons = () => {
         ))}
       </View>
     </ScrollView>
+    </View>
   );
 };
 
