@@ -3,9 +3,10 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  Linking,
   Image,
   Alert,
-  ActivityIndicator, // Import ActivityIndicator
+  ActivityIndicator, 
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
@@ -148,12 +149,14 @@ const Login: React.FC<LoginProps> = () => {
         <View className="flex-1 h-[1px] bg-gray-300" />
       </View>
 
-      <TouchableOpacity>
-        <Text className="mb-14">
-          <Text className="text-[#9D9FA0]">Don't have an account? </Text>
+      <Text className="mb-14 text-[#9D9FA0]">
+        Don't have an account?{" "}
+        <TouchableOpacity
+          onPress={() => Linking.openURL("https://www.dolewrite.com/")}
+        >
           <Text className="text-[#F97316] font-bold">Sign up</Text>
-        </Text>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </Text>
     </View>
   );
 };
