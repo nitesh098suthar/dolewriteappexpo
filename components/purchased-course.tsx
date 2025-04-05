@@ -5,7 +5,8 @@ import { Link } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import SubjectCard from "./subject-card";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import axios from "axios";
+import Skeleton from "./skeleton";
+import HomePageSkeleton from "./hp-skeleton";
 
 const PurchasedCourse = () => {
   const [subjects, setSubjects] = useState([]);
@@ -79,10 +80,7 @@ const PurchasedCourse = () => {
 
   const renderItem = ({ item }: { item: any }) => {
     return (
-      <Link
-        href={`/course/${item.folder.uri.slice(-8)}`}
-      
-      >
+      <Link href={`/course/${item.folder.uri.slice(-8)}`}>
         <SubjectCard subjectName={item.folder.name} />
       </Link>
     );
@@ -91,8 +89,8 @@ const PurchasedCourse = () => {
   return (
     <View>
       {isLoading ? (
-        <View style={{ marginTop: 50, alignItems: "center" }}>
-          <ActivityIndicator size="large" color="#F97316" />
+        <View style={{ marginTop: 16 }}>
+          <HomePageSkeleton />
         </View>
       ) : (
         <View>

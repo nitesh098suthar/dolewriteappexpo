@@ -20,7 +20,6 @@ interface ProfileInfoProps {
 
 const ProfileInfo = ({ label, value }: ProfileInfoProps) => (
   <View className="w-full items-center justify-center px-4">
-    <View className="w-full h-[1px] bg-white/20 my-4" />
     <Text className="text-white text-2xl font-semibold mb-2 text-center">
       {label}
     </Text>
@@ -69,15 +68,6 @@ const Profile = () => {
       // Handle logout error (e.g., show an alert)
     }
   };
-
-  if (isLoading) {
-    return (
-      <View className="flex-1 justify-center items-center bg-white">
-        <ActivityIndicator size="large" color="#F97316" />
-      </View>
-    );
-  }
-
   return (
     <View className="flex-1 bg-white">
       <Image
@@ -111,19 +101,22 @@ const Profile = () => {
                     />
                   </View>
                 </View>
-                <View className="items-center mb-4">
-                  <Text className="text-white text-2xl font-semibold text-center">
-                    Subscribed Class
-                  </Text>
-                  <Text className="text-white/90 text-lg text-center">
-                    {profileData?.generatedType}
-                  </Text>
-                </View>
 
-                <ProfileInfo label="Your ID" value={profileData?.id} />
+                <ProfileInfo
+                  label="Subscribed Class"
+                  value={isLoading ? "Loading..." : profileData?.generatedType}
+                />
+                <View className="w-full h-[1px] bg-white/20 my-4" />
+
+                <ProfileInfo
+                  label="Your ID"
+                  value={isLoading ? "Loading..." : profileData?.id}
+                />
+                <View className="w-full h-[1px] bg-white/20 my-4" />
+
                 <ProfileInfo
                   label="School Name"
-                  value={profileData?.schoolName}
+                  value={isLoading ? "Loading..." : profileData?.schoolName}
                 />
 
                 <TouchableOpacity

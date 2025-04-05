@@ -1,15 +1,9 @@
-import { Image, ScrollView, View, Text, TouchableOpacity } from "react-native";
+import { Image, ScrollView, View, Text } from "react-native";
 import { useRouter } from "expo-router";
 import PurchasedCourse from "@/components/purchased-course";
-import * as Keychain from "react-native-keychain";
-import { useEffect } from "react";
-import { httpClient } from "@/services/api";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
-interface Credentials {
-  id: string;
-  password: string;
-}
+import Footer from "@/components/footer";
+import MyCarousel from "@/components/main-carousel";
 
 export default function Home() {
   const router = useRouter();
@@ -27,24 +21,12 @@ export default function Home() {
           paddingBottom: 80,
         }}
       >
-        <View
-          style={{
-            width: "100%",
-            aspectRatio: 16 / 9,
-            overflow: "hidden",
-          }}
-        >
-          <Image
-            source={require("@/assets/images/home-box.png")}
-            resizeMode="stretch"
-            style={{ width: "100%", height: "100%" }}
-            alt="home page sliding banners"
-          />
-        </View>
+        <MyCarousel />
         <Text className="text-2xl font-extrabold mt-4 text-black">
           Your Courses
         </Text>
         <PurchasedCourse />
+        <Footer />
       </ScrollView>
     </View>
   );
