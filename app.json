@@ -14,6 +14,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/dolewrite.png",
+        "imageWidth": "100%",
         "backgroundColor": "#ffffff"
       },
       "package": "com.nitesh098suthar.myapp"
@@ -29,9 +30,7 @@
         "expo-splash-screen",
         {
           "image": "./assets/images/splashScreen.png",
-          "imageWidth": "100%",
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "resizeMode": "cover"
         }
       ]
     ],
