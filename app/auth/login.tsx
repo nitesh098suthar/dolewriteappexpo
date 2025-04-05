@@ -60,8 +60,8 @@ const Login: React.FC<LoginProps> = () => {
     setErr("");
     setLoading(true); //start loading when login handler is called.
     if (!loginId || !loginPassword) {
-      Alert.alert("Error", "Please enter ID and Password.");
-      setLoading(false); //stop loading if there is an error.
+      setErr("Enter your ID and Password"); // Set the error message
+      setLoading(false);
       return;
     }
     try {
@@ -92,16 +92,11 @@ const Login: React.FC<LoginProps> = () => {
     }
   };
 
-  if (loading) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" color="#F97316"/>
-      </View>
-    );
-  }
   const handleSignUpPress = () => {
-    const websiteURL = 'https://www.dolewrite.com/sign-up';
-    Linking.openURL(websiteURL).catch((err) => console.error('An error occurred: ', err));
+    const websiteURL = "https://www.dolewrite.com/sign-up";
+    Linking.openURL(websiteURL).catch((err) =>
+      console.error("An error occurred: ", err)
+    );
   };
   return (
     <View className="flex-1 bg-white items-center justify-center px-6">
@@ -132,18 +127,21 @@ const Login: React.FC<LoginProps> = () => {
           />
         </TouchableOpacity>
       </View>
-      {err && (
+      {err !== "" && (
         <View style={{ width: "100%" }}>
-          <Text className="text-sm text-red-600 pt-2 pl-2">
-            Wrong Credentials
-          </Text>
+          <Text className="text-sm text-red-600 pt-2 pl-2">{err}</Text>
         </View>
       )}
       <TouchableOpacity
         className="bg-[#F97316] w-full py-3 rounded-lg mb-4 items-center mt-6"
         onPress={loginHandler}
+        disabled={loading} // Optional: prevent multiple presses
       >
-        <Text className="text-white font-bold">Login</Text>
+        {loading ? (
+          <ActivityIndicator size="small" color="#fff" />
+        ) : (
+          <Text className="text-white font-bold">Login</Text>
+        )}
       </TouchableOpacity>
 
       <View className="flex-row items-center w-full my-4">
