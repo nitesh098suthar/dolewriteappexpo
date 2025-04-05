@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { vimeoHttpClient } from "@/services/api";
 import { Link } from "expo-router";
 import SubjectCard from "./subject-card";
+import HomePageSkeleton from "./hp-skeleton";
 
 const CourseList = ({
   courseName,
@@ -62,9 +63,9 @@ const CourseList = ({
   return (
     <View>
       {isLoading ? (
-        <View style={{ marginTop: 50, alignItems: "center" }}>
-          <ActivityIndicator size="large" color="#F97316" />
-        </View>
+       <View style={{ marginTop: 16 }}>
+       <HomePageSkeleton />
+     </View>
       ) : isError ? (
         <Text style={{ color: "black", margin: 10 }}>Error: {isError}</Text>
       ) : (

@@ -12,6 +12,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useLocalSearchParams } from "expo-router";
 import { vimeoHttpClient } from "@/services/api";
 import { WebView } from "react-native-webview";
+import CourseDetailSkeleton from "@/components/cd-skeleton";
+import Skeleton from "@/components/skeleton";
 
 interface VideoData {
   player_embed_url: string;
@@ -100,14 +102,6 @@ const Lessons = () => {
     setDescription(description || "");
   };
 
-  if (isLoading) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" color="#F97316" />
-      </View>
-    );
-  }
-
   return (
     <View className="flex-1 bg-white">
       <Image
@@ -117,36 +111,43 @@ const Lessons = () => {
       />
       <ScrollView style={{ flex: 1, padding: 16 }}>
         <View style={{ marginBottom: 16 }}>
-          {currentVideoUrl && (
-            <View
-              style={{
-                height: 300,
-                borderRadius: 8,
-                overflow: "hidden",
-              }}
-              className="mt-11"
-            >
-              <WebView
-                source={{
-                  uri: currentVideoUrl,
-                  headers: {
-                    Referer: "https://www.dolewrite.com",
-                  },
-                }}
-                style={{ flex: 1 }}
-                allowsFullscreenVideo={true}
-                mediaPlaybackRequiresUserAction={false}
-              />
-              <Text
-                style={{
-                  fontSize: 18,
-                  fontWeight: "bold",
-                  marginBottom: 12,
-                }}
-              >
-                {lectureName.charAt(0).toUpperCase() + lectureName.slice(1)}
-              </Text>
+          {isLoading ? (
+            <View className="mt-16">
+              <Skeleton height={250} />
+              <Skeleton height={40} />
             </View>
+          ) : (
+            currentVideoUrl && (
+              <View
+                style={{
+                  height: 300,
+                  borderRadius: 8,
+                  overflow: "hidden",
+                }}
+                className="mt-11"
+              >
+                <WebView
+                  source={{
+                    uri: currentVideoUrl,
+                    headers: {
+                      Referer: "https://www.dolewrite.com",
+                    },
+                  }}
+                  style={{ flex: 1 }}
+                  allowsFullscreenVideo={true}
+                  mediaPlaybackRequiresUserAction={false}
+                />
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: "bold",
+                    marginBottom: 12,
+                  }}
+                >
+                  {lectureName.charAt(0).toUpperCase() + lectureName.slice(1)}
+                </Text>
+              </View>
+            )
           )}
         </View>
 
@@ -171,80 +172,98 @@ const Lessons = () => {
             </Text>
           </View>
 
-          {videos?.map((video, index) => (
-            <View
-              key={video?.uri}
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: 8,
-              }}
-            >
-              {/* Video Title Button */}
-              <TouchableOpacity
-                style={[
-                  { flex: 1, padding: 12, borderRadius: 8, marginRight: 8 },
-                  activeVideoIndex === index
-                    ? { backgroundColor: "#F97316" }
-                    : { backgroundColor: "#D9D9D9" },
-                ]}
-                onPress={() =>
-                  handleVideoTitleClick(
-                    index,
-                    video.player_embed_url,
-                    video.name,
-                    video.description
-                  )
-                }
+          {isLoading ? (
+            <CourseDetailSkeleton />
+          ) : (
+            videos?.map((video, index) => (
+              <View
+                key={video?.uri}
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: 8,
+                }}
               >
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  {/* Checkbox */}
-                  <TouchableOpacity onPress={() => handleCheckboxClick(index)}>
-                    <View
-                      style={{
-                        width: 18,
-                        height: 18,
-                        borderWidth: 1,
-                        borderColor: "gray",
-                        borderRadius: 4,
-                        alignItems: "center",
-                        justifyContent: "center",
-                        marginRight: 8,
-                        backgroundColor: completedLectures.includes(index)
-                          ? "transparent"
-                          : "white",
-                      }}
+                {/* Video Title Button */}
+                <TouchableOpacity
+                  style={[
+                    { flex: 1, padding: 12, borderRadius: 8, marginRight: 8 },
+                    activeVideoIndex === index
+                      ? { backgroundColor: "#F97316" }
+                      : { backgroundColor: "#D9D9D9" },
+                  ]}
+                  onPress={() =>
+                    handleVideoTitleClick(
+                      index,
+                      video.player_embed_url,
+                      video.name,
+                      video.description
+                    )
+                  }
+                >
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    {/* Checkbox */}
+                    <TouchableOpacity
+                      onPress={() => handleCheckboxClick(index)}
                     >
-                      {completedLectures.includes(index) && (
-                        <Text style={{ color: "green", fontWeight: "bold" }}>
-                          ✔
-                        </Text>
-                      )}
-                    </View>
-                  </TouchableOpacity>
+                      <View
+                        style={{
+                          width: 18,
+                          height: 18,
+                          borderWidth: 1,
+                          borderColor: "gray",
+                          borderRadius: 4,
+                          alignItems: "center",
+                          justifyContent: "center",
+                          marginRight: 8,
+                          backgroundColor: completedLectures.includes(index)
+                            ? "transparent"
+                            : "white",
+                        }}
+                      >
+                        {completedLectures.includes(index) && (
+                          <Text style={{ color: "green", fontWeight: "bold" }}>
+                            ✔
+                          </Text>
+                        )}
+                      </View>
+                    </TouchableOpacity>
 
-                  <Text className="text-white font-bold">
-                    {video?.name.charAt(0).toUpperCase() + video?.name.slice(1)}
-                  </Text>
-                </View>
-              </TouchableOpacity>
+                    <Text className="text-white font-bold">
+                      {video?.name.charAt(0).toUpperCase() +
+                        video?.name.slice(1)}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
 
-              {/* Assessment Button */}
-              <TouchableOpacity
-                className="bg-primary"
-                style={{ padding: 10, borderRadius: 8 }}
-                onPress={() =>
-                  Linking.openURL(
-                    video?.description?.split("&&&")[1] ||
-                      "https://wordwall.net/"
-                  )
-                }
-              >
-                <Text className="text-white font-bold">Go</Text>
-              </TouchableOpacity>
-            </View>
-          ))}
+                {/* Assessment Button */}
+                <TouchableOpacity
+                  className="bg-primary"
+                  style={{
+                    borderRadius: 8,
+                    width: 44,
+                    aspectRatio: 1 / 1,
+                    overflow: "hidden",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                  onPress={() =>
+                    Linking.openURL(
+                      video?.description?.split("&&&")[1] ||
+                        "https://wordwall.net/"
+                    )
+                  }
+                >
+                  <Image
+                    source={require("@/assets/icons/assessment.png")}
+                    tintColor={"white"}
+                    style={{ aspectRatio: 1 / 1, height: 24, width: 24 }}
+                  />
+                </TouchableOpacity>
+              </View>
+            ))
+          )}
         </View>
       </ScrollView>
     </View>

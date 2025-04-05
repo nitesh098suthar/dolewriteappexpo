@@ -5,11 +5,11 @@ import Skeleton from "./skeleton";
 const HomePageSkeleton = () => {
   return (
     <View>
-      <Skeleton height={50} />
-      <Skeleton height={160} />
-      <Skeleton height={160} />
-      <Skeleton height={160} />
-      <Skeleton height={160} />
+      <Skeleton height={40} />
+      <Skeleton height={158} />
+      <Skeleton height={158} />
+      <Skeleton height={158} />
+      <Skeleton height={158} />
     </View>
   );
 };

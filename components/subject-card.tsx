@@ -65,7 +65,7 @@ const SubjectCard = ({ subjectName }: { subjectName: string }) => {
                   alt="thumbnails"
                 />
               </View>
-              <Text className="text-xs">Linda</Text>
+              <Text className="text-xs">Michel</Text>
             </View>
             <View
               className=""
