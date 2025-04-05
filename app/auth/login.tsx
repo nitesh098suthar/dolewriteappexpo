@@ -55,7 +55,6 @@ const Login: React.FC<LoginProps> = () => {
 
     checkLoggedIn();
   }, []);
-
   const loginHandler = async () => {
     setErr("");
     setLoading(true); //start loading when login handler is called.
