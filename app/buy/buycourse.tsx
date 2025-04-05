@@ -5,12 +5,19 @@ import {
   ScrollView,
   TouchableOpacity,
   Linking,
+  Alert,
 } from "react-native";
 import React from "react";
 
 const BuyCourse = () => {
-  const handleSubscribe = () => {
-    Linking.openURL("https://www.dolewrite.com/");
+  const handleSubscribe = async () => {
+    const url = "https://www.dolewrite.com/sign-up";
+    const supported = await Linking.canOpenURL(url);
+    if (supported) {
+      await Linking.openURL(url);
+    } else {
+      Alert.alert("Unable to open URL", url);
+    }
   };
 
   return (
@@ -83,7 +90,7 @@ const BuyCourse = () => {
             {[
               {
                 text: "Visit our website - ",
-                link: "Dolewrite.com/subscribe",
+                link: "https://www.dolewrite.com/",
                 isLink: true,
               },
               { text: "Choose a subscription plan that fits your needs" },
@@ -112,10 +119,10 @@ const BuyCourse = () => {
             ))}
           </View>
 
-        <View className="mt-10">
-          <Text className="text-2xl font-extrabold text-left text-gray-900">
-            What’s Included in Your Subscription?
-          </Text>
+          <View className="mt-10">
+            <Text className="text-2xl font-extrabold text-left text-gray-900">
+              What’s Included in Your Subscription?
+            </Text>
           </View>
 
           <View className="mt-4">
