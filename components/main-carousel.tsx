@@ -6,10 +6,10 @@ const { width } = Dimensions.get("window");
 
 export default function MyCarousel() {
   const data = [
-    require("@/assets/images/home-box.png"),
-    require("@/assets/images/about-box.png"),
-    require("@/assets/images/buy-box.png"),
-    require("@/assets/images/about-box.png"),
+    require("@/assets/images/carousel/one.png"),
+    require("@/assets/images/carousel/two.png"),
+    require("@/assets/images/carousel/three.png"),
+    require("@/assets/images/carousel/four.png"),
   ];
 
   return (
@@ -24,7 +24,7 @@ export default function MyCarousel() {
           <View
             style={{
               flex: 1,
-              borderRadius:0,
+              borderRadius: 0,
               justifyContent: "center",
               alignItems: "center",
               marginHorizontal: 8,

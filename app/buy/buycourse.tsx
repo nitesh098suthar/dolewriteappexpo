@@ -42,7 +42,7 @@ const BuyCourse = () => {
           }}
         >
           <Image
-            source={require("@/assets/images/buy-box.png")}
+            source={require("@/assets/images/banners/buy-box.png")}
             resizeMode="stretch"
             style={{ width: "100%", height: "100%" }}
             alt="Buy Course Banner"

@@ -25,7 +25,7 @@ const Course = () => {
           }}
         >
           <Image
-            source={require("@/assets/images/course-box.png")}
+            source={require("@/assets/images/banners/course-box.png")}
             resizeMode="stretch"
             style={{ width: "100%", height: "100%" }}
             alt="Course Box Banner"

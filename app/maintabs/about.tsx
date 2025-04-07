@@ -24,7 +24,7 @@ const About = () => {
           }}
         >
           <Image
-            source={require("@/assets/images/about-box.png")}
+            source={require("@/assets/images/banners/about-box.png")}
             resizeMode="stretch"
             style={{ width: "100%", height: "100%" }}
             alt="About Box"

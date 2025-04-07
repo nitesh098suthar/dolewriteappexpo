@@ -14,6 +14,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/dolewrite.png",
+        "resizeMode": "cover",
         "imageWidth": "100%",
         "backgroundColor": "#ffffff"
       },
@@ -29,7 +30,13 @@
       [
         "expo-splash-screen",
         {
+          "backgroundColor": "#ffffff",
           "image": "./assets/images/splashScreen.png",
+          "dark": {
+            "image": "./assets/images/splashScreen.png",
+            "backgroundColor": "#ffffff",
+            "resizeMode": "cover"
+          },
           "resizeMode": "cover"
         }
       ]
