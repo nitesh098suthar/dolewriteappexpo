@@ -99,12 +99,20 @@ const Login: React.FC<LoginProps> = () => {
   };
   return (
     <View className="flex-1 bg-white items-center justify-center px-6">
-      <Image
-        source={require("@/assets/images/login-logo.png")}
-        className="w-32 h-32 mb-6"
-        resizeMode="contain"
-      />
-
+      <View
+        style={{
+          width: 70,
+          marginBottom: 35,
+          aspectRatio: 1 / 1,
+          overflow: "hidden",
+        }}
+      >
+        <Image
+          source={require("@/assets/images/login-logo.png")}
+          resizeMode="stretch"
+          style={{ width: "100%", height: "100%" }}
+        />
+      </View>
       <TextInput
         placeholder="Name"
         className="w-full rounded-lg p-3 mb-4 bg-[#F6F7FA]"
