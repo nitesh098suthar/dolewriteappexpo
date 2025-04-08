@@ -23,12 +23,14 @@ const COLORS = ["black", "red", "blue", "green", "orange", "purple"];
 type DrawnPath = {
   d: string;
   color: string;
+  strokeWidth: number;
 };
 
 const Draw = () => {
   const [paths, setPaths] = useState<DrawnPath[]>([]);
   const [currentPath, setCurrentPath] = useState<string>("");
   const [selectedColor, setSelectedColor] = useState<string>("black");
+  const [isErasing, setIsErasing] = useState<boolean>(false);
 
   const onGestureEvent = (event: PanGestureHandlerGestureEvent) => {
     const { x, y, state } = event.nativeEvent;
@@ -38,7 +40,14 @@ const Draw = () => {
     } else if (state === State.ACTIVE) {
       setCurrentPath((prev) => `${prev} L${x},${y}`);
     } else if (state === State.END) {
-      setPaths((prev) => [...prev, { d: currentPath, color: selectedColor }]);
+      setPaths((prev) => [
+        ...prev,
+        {
+          d: currentPath,
+          color: isErasing ? "#fff" : selectedColor,
+          strokeWidth: isErasing ? 10 : 2,
+        },
+      ]);
       setCurrentPath("");
     }
   };
@@ -46,6 +55,10 @@ const Draw = () => {
   const clearCanvas = () => {
     setPaths([]);
     setCurrentPath("");
+  };
+
+  const toggleEraser = () => {
+    setIsErasing((prev) => !prev);
   };
 
   return (
@@ -62,14 +75,25 @@ const Draw = () => {
                 styles.colorOption,
                 {
                   backgroundColor: color,
-                  borderWidth: selectedColor === color ? 2 : 0,
+                  borderWidth: selectedColor === color && !isErasing ? 2 : 0,
                   borderColor: "#000",
                 },
               ]}
-              onPress={() => setSelectedColor(color)}
+              onPress={() => {
+                setSelectedColor(color);
+                setIsErasing(false);
+              }}
             />
           ))}
         </View>
+
+        {/* Eraser Toggle */}
+        <TouchableOpacity
+          style={[styles.eraserButton, isErasing && styles.eraserActive]}
+          onPress={toggleEraser}
+        >
+          <Text style={styles.eraserText}>{isErasing ? "Eraser On" : "Eraser Off"}</Text>
+        </TouchableOpacity>
 
         {/* Drawing Area */}
         <PanGestureHandler
@@ -83,15 +107,15 @@ const Draw = () => {
                   key={index}
                   d={pathObj.d}
                   stroke={pathObj.color}
-                  strokeWidth={2}
+                  strokeWidth={pathObj.strokeWidth}
                   fill="none"
                 />
               ))}
               {currentPath ? (
                 <Path
                   d={currentPath}
-                  stroke={selectedColor}
-                  strokeWidth={2}
+                  stroke={isErasing ? "#fff" : selectedColor}
+                  strokeWidth={isErasing ? 10 : 2}
                   fill="none"
                 />
               ) : null}
@@ -128,9 +152,23 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginHorizontal: 5,
   },
+  eraserButton: {
+    marginBottom: 10,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    backgroundColor: "#ddd",
+    borderRadius: 6,
+  },
+  eraserActive: {
+    backgroundColor: "#bbb",
+  },
+  eraserText: {
+    fontWeight: "bold",
+    color: "#333",
+  },
   canvas: {
     width: "90%",
-    height: "75%",
+    height: "70%",
     backgroundColor: "#fff",
     borderWidth: 1,
     borderColor: "#000",
