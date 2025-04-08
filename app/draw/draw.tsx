@@ -12,7 +12,7 @@ import {
   PanGestureHandlerGestureEvent,
   State,
 } from "react-native-gesture-handler";
-import Svg, { Path } from "react-native-svg";
+import Svg, { Path, Circle } from "react-native-svg";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const { width, height } = Dimensions.get("window");
@@ -31,9 +31,19 @@ const Draw = () => {
   const [currentPath, setCurrentPath] = useState<string>("");
   const [selectedColor, setSelectedColor] = useState<string>("black");
   const [isErasing, setIsErasing] = useState<boolean>(false);
-
+  const [eraserPos, setEraserPos] = useState<{ x: number; y: number } | null>(
+    null
+  );
   const onGestureEvent = (event: PanGestureHandlerGestureEvent) => {
     const { x, y, state } = event.nativeEvent;
+
+    if (isErasing) {
+      if (state === State.BEGAN || state === State.ACTIVE) {
+        setEraserPos({ x, y });
+      } else if (state === State.END) {
+        setEraserPos(null);
+      }
+    }
 
     if (state === State.BEGAN) {
       setCurrentPath(`M${x},${y}`);
@@ -45,7 +55,7 @@ const Draw = () => {
         {
           d: currentPath,
           color: isErasing ? "#fff" : selectedColor,
-          strokeWidth: isErasing ? 10 : 2,
+          strokeWidth: isErasing ? 20 : 2,
         },
       ]);
       setCurrentPath("");
@@ -92,7 +102,9 @@ const Draw = () => {
           style={[styles.eraserButton, isErasing && styles.eraserActive]}
           onPress={toggleEraser}
         >
-          <Text style={styles.eraserText}>{isErasing ? "Eraser On" : "Eraser Off"}</Text>
+          <Text style={styles.eraserText}>
+            {isErasing ? "Eraser On" : "Eraser Off"}
+          </Text>
         </TouchableOpacity>
 
         {/* Drawing Area */}
@@ -115,10 +127,22 @@ const Draw = () => {
                 <Path
                   d={currentPath}
                   stroke={isErasing ? "#fff" : selectedColor}
-                  strokeWidth={isErasing ? 10 : 2}
+                  strokeWidth={isErasing ? 20 : 2}
                   fill="none"
                 />
               ) : null}
+
+              {/* Eraser Preview */}
+              {isErasing && eraserPos && (
+                <Circle
+                  cx={eraserPos.x}
+                  cy={eraserPos.y}
+                  r={10} // Eraser radius
+                  stroke="gray"
+                  strokeWidth={1}
+                  fill="rgba(255,255,255,0.6)"
+                />
+              )}
             </Svg>
           </View>
         </PanGestureHandler>
