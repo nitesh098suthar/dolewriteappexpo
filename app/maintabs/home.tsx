@@ -1,5 +1,5 @@
 import { Image, ScrollView, View, Text } from "react-native";
-import { useRouter } from "expo-router";
+import { Link, useRouter } from "expo-router";
 import PurchasedCourse from "@/components/purchased-course";
 
 import Footer from "@/components/footer";
@@ -23,7 +23,7 @@ export default function Home() {
       >
         <MyCarousel />
         <Text className="text-2xl font-extrabold mt-4 text-black">
-          Your Courses
+          <Link href={"/draw/draw"}>Your Courses</Link>
         </Text>
         <PurchasedCourse />
         <Footer />
