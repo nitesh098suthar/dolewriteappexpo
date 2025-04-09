@@ -45,6 +45,16 @@ const _layout = () => {
         }}
       />
       <Tabs.Screen
+        name="draw"
+        options={{
+          title: "draw",
+          headerShown: false,
+          tabBarIcon: ({ focused }) => (
+            <TabIcon focused={focused} title={"Draw"} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="about"
         options={{
           title: "about",
@@ -76,6 +86,7 @@ const TabIcon = ({ focused, title }: any) => {
     Profile: require("@/assets/icons/person.png"),
     About: require("@/assets/icons/about.png"),
     Course: require("@/assets/icons/course.png"),
+    Draw: require("@/assets/icons/draw.png"),
   };
 
   const iconSource: any = iconMap[title];

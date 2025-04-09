@@ -30,12 +30,6 @@ export default function RootLayout() {
           }}
         />
         <Stack.Screen
-          name="draw/draw"
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
           name="maintabs"
           options={{
             headerShown: false,
