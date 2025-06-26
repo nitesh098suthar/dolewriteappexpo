@@ -5,6 +5,7 @@ import { Link } from "expo-router";
 const VideoCard = ({ videoData }: any) => {
   return (
     <Link
+      style={{ marginTop: 12 }}
       href={{
         pathname: "/free-tier/videos/[id]",
         params: { id: videoData.uri.slice(-10) },
@@ -27,7 +28,7 @@ const VideoCard = ({ videoData }: any) => {
           }}
         >
           <Image
-            source={require("@/assets/images/about-main.png")}
+            source={require("@/assets/images/about/about-main.png")}
             resizeMode="stretch"
             style={{ width: "100%", height: "100%" }}
             alt="thumbnails"
