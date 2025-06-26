@@ -32,19 +32,16 @@ const About = () => {
         </View>
 
         <View>
-          <Text className="text-2xl font-extrabold mt-8">About Us</Text>
-          <Text className="text-xl font-semibold mt-3">
-            Want to know more about us? Here we've provided more details about
-            us.
-          </Text>
-          <Text className="text-lg mt-3">
+          <Text className="text-2xl font-extrabold mt-10">About Us</Text>
+          <Text className="text-lg mt-4">
             Dolewrite began with a simple idea: learning should be as fun as
-            playtime! We're a team of educators, designers, and dreamers who
-            believe kids learn best when they're excited. That's why we built an
-            e-learning app packed with interactive courses.
+            playtime! We are a team of educators, designers and dreamers who
+            believe kids learn best when they are excited. That is why we built
+            an e-learning app packed with interactive courses-all designed to
+            make kids smile while they grow.
           </Text>
           <Image
-            source={require("@/assets/images/about-main.png")}
+            source={require("@/assets/images/about/about-main.png")}
             className="w-full rounded-2xl"
             resizeMode="contain"
             alt="About Dolewrite"
@@ -53,37 +50,39 @@ const About = () => {
 
         <View>
           <Text className="text-2xl font-extrabold">Our Mission</Text>
-          <Text className="text-lg mt-3">
-            At Dolewrite, we’re on a mission to make learning a blast for kids
-            aged 3 to 6. We believe every child is a star, and our job is to
-            help them shine brighter with fun, interactive courses.
+          <Text className="text-lg mt-4">
+            At Dolewrite, we are on a mission to make learning a blast for kids.
+            We believe every child is a star and our job is to help them shine
+            brighter with fun, interactive courses they can explore at their own
+            pace. From classrooms to living rooms, we are here to bring
+            education and imagination together!
           </Text>
         </View>
 
-        <View className="mt-10">
+        <View className="mt-14">
           <Text className="text-2xl font-extrabold">
-            Why Kids Love Dolewrite?
+            Why Choose Dolewrite?
           </Text>
-          <View className="mt-3">
+          <View className="mt-6">
             <Text className="text-lg mb-2">
-              <Text className="font-bold">1</Text>•{" "}
-              <Text className="font-bold">
-                Interactive Learning Adventures :{" "}
+              <Text className="font-semibold">1</Text>•{" "}
+              <Text className="font-semibold">
+                Interactive Learning:{" "}
               </Text>{" "}
-              Our lessons are designed as exciting quests where every new
-              concept is a discovery waiting to happen.
+              Engaging courses with animations & fun activities.
             </Text>
-            <Text className="text-xl mb-2">
-              <Text className="font-bold">2</Text>•{" "}
-              <Text className="font-bold">Personalized Learning Paths : </Text>{" "}
-              Each child progresses at their own pace, with content that adapts
-              to their unique learning style and interests.
+            <Text className="text-lg mb-2">
+              <Text className="font-semibold">2</Text>•{" "}
+              <Text className="font-semibold">Expert-Crafted Content: </Text>{" "}
+              Designed by educators for young minds.
             </Text>
-            <Text className="text-xl mb-10">
-              <Text className="font-bold">3</Text>•{" "}
-              <Text className="font-bold">Rewards and Recognition : </Text> Kids
-              earn badges, points, and special achievements as they master new
-              skills.
+            <Text className="text-lg mb-2">
+              <Text className="font-semibold">3</Text>•{" "}
+              <Text className="font-semibold">Seamless Access: </Text> Learn anytime, anywhere, on any device.
+            </Text>
+            <Text className="text-lg mb-10">
+              <Text className="font-semibold">4</Text>•{" "}
+              <Text className="font-semibold">Safe & Kid-Friendly: </Text> A secure learning space for children.
             </Text>
           </View>
         </View>

@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     fontWeight: "bold",
-    marginBottom: 16,
+    marginBottom: 20,
     color: "black",
   },
   faqList: {
@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
   },
   questionText: {
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: "500",
     color: "black",
     flex: 1,
   },

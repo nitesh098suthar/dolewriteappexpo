@@ -1,6 +1,7 @@
 import React from "react";
 import { Tabs } from "expo-router";
-import { Image, ImageBackground, Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
+
 const _layout = () => {
   return (
     <Tabs
@@ -91,37 +92,18 @@ const TabIcon = ({ focused, title }: any) => {
 
   const iconSource: any = iconMap[title];
 
-  if (focused) {
-    return (
-      <>
-        <View
-          // source={require("@/assets/images/highlight.png")}
-          className="flex-1 justify-center items-center min-h-16 rounded-full min-w-[112px] mt-4 overflow-hidden bg-white"
-          style={{ flexDirection: "row" }}
-        >
-          <Image
-            source={iconSource}
-            tintColor={"#F97316"}
-            style={{ width: 18, height: 18 }}
-            resizeMode="contain"
-          />
-          <Text className="text-primary text-base font-semibold ml-2">
-            {title}
-          </Text>
-        </View>
-      </>
-    );
-  }
   return (
-    <>
-      <View className="flex-1 justify-center items-center min-h-16 rounded-full min-w-[112px] mt-4 overflow-hidden">
-        <Image
-          source={iconSource}
-          tintColor={"white"}
-          style={{ width: 18, height: 18 }}
-          resizeMode="contain"
-        />
-      </View>
-    </>
+    <View
+      className={`flex-1 justify-center items-center min-h-16 rounded-full mt-4 ${
+        focused ? "bg-white min-w-[68px]" : "min-w-[68px]"
+      }`}
+    >
+      <Image
+        source={iconSource}
+        tintColor={focused ? "#F97316" : "white"}
+        style={{ width: 18, height: 18 }}
+        resizeMode="contain"
+      />
+    </View>
   );
 };

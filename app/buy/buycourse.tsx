@@ -49,20 +49,6 @@ const BuyCourse = () => {
           />
         </View>
 
-        <Text className="text-2xl font-extrabold text-left text-gray-900 mt-10">
-          Subscribe Now And Give Your Child the Best Start!
-        </Text>
-
-        {/* Subscribe Now Button */}
-        <TouchableOpacity
-          className="mt-6 bg-[#0F172A] py-4 px-6 rounded-xl w-40"
-          onPress={handleSubscribe}
-        >
-          <Text className="text-white text-center text-md font-semibold text-nowrap">
-            Subscribe Now
-          </Text>
-        </TouchableOpacity>
-
         <View className="mt-8">
           <Text className="text-2xl font-extrabold text-left text-gray-900">
             Unlock Exclusive Learning
@@ -72,10 +58,7 @@ const BuyCourse = () => {
           </Text>
 
           <Text className="text-lg text-gray-700 mt-2">
-            You’ve clicked on an exclusive learning video that’s part of our
-            premium content! Subscribing to Dolewrite gives your child access to
-            a fun, interactive, and safe learning experience designed
-            specifically for ages 3-6.
+            You have clicked on an exclusive learning video that is part of our premium content! Subscribing to Dolewrite gives your child access to a fun, interactive and safe learning experience.
           </Text>
 
           <Text className="text-2xl font-extrabold text-left text-gray-900 mt-10">
@@ -117,11 +100,19 @@ const BuyCourse = () => {
                 )}
               </Text>
             ))}
+            <TouchableOpacity
+          className="mt-6 bg-[#0F172A] py-4 px-6 rounded-xl w-40"
+          onPress={handleSubscribe}
+        >
+          <Text className="text-white text-center text-md font-semibold text-nowrap">
+            Subscribe Now
+          </Text>
+        </TouchableOpacity>
           </View>
 
           <View className="mt-10">
             <Text className="text-2xl font-extrabold text-left text-gray-900">
-              What’s Included in Your Subscription?
+              What is Included in Your Subscription?
             </Text>
           </View>
 
@@ -139,10 +130,23 @@ const BuyCourse = () => {
                   className="w-5 h-5 mr-2"
                   resizeMode="contain"
                 />
-                <Text className="text-lg text-gray-700">{item}</Text>
+                <Text className="text-lg font-medium">{item}</Text>
               </View>
             ))}
           </View>
+          <Text className="text-2xl font-extrabold text-left text-gray-900 mt-10">
+          Subscribe Now & Give Your Child the Best Start!
+        </Text>
+
+        {/* Subscribe Now Button */}
+        <TouchableOpacity
+          className="mt-6 bg-[#0F172A] py-4 px-6 rounded-xl w-40"
+          onPress={handleSubscribe}
+        >
+          <Text className="text-white text-center text-md font-semibold text-nowrap">
+            Subscribe Now
+          </Text>
+        </TouchableOpacity>
         </View>
       </ScrollView>
     </View>
