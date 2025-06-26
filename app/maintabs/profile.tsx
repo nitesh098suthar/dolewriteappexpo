@@ -4,14 +4,14 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
-  ActivityIndicator, // Import ActivityIndicator
+  Linking,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import axios from "axios";
 import { httpClient } from "@/services/api";
+import { MaterialIcons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
 
 interface ProfileInfoProps {
   label: string;
@@ -19,11 +19,11 @@ interface ProfileInfoProps {
 }
 
 const ProfileInfo = ({ label, value }: ProfileInfoProps) => (
-  <View className="w-full items-center justify-center px-4">
-    <Text className="text-white text-2xl font-semibold mb-2 text-center">
+  <View className="w-full items-center justify-center px-4 mb-4">
+    <Text className="text-gray-800 text-xl font-semibold mb-1 text-center">
       {label}
     </Text>
-    <Text className="text-white/90 text-lg text-center mb-2">
+    <Text className="text-gray-600 text-base text-center">
       {value || "N/A"}
     </Text>
   </View>
@@ -44,15 +44,11 @@ const Profile = () => {
 
           const response = await httpClient.get(`/user/${id}`);
           setProfileData(response.data.getauth);
-          setIsLoading(false);
-        } else {
-          setIsLoading(false);
-          // Handle case where user credentials are not found (e.g., redirect to login)
         }
       } catch (error) {
         console.error("Error fetching profile data:", error);
+      } finally {
         setIsLoading(false);
-        // Handle error (e.g., show error message)
       }
     };
 
@@ -62,94 +58,124 @@ const Profile = () => {
   const handleLogout = async () => {
     try {
       await AsyncStorage.removeItem("userCredentials");
-      router.replace("/auth/login"); // Navigate to login after logout
+      router.replace("/auth/login");
     } catch (error) {
       console.error("Logout error:", error);
-      // Handle logout error (e.g., show an alert)
     }
   };
+
   return (
     <View className="flex-1 bg-white">
+      {/* ✅ Background image */}
       <Image
         source={require("@/assets/images/bg.png")}
-        className="absolute w-full"
+        className="absolute w-full h-full"
         resizeMode="cover"
       />
 
       <ScrollView
-        className="flex-1 px-5 mt-16"
+        className="px-5 mt-16"
         showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          paddingBottom: 80,
+        }}
       >
         <View className="items-center justify-center">
-          <View className="w-[100%] rounded-3xl overflow-hidden shadow-lg">
-            <ScrollView>
-              <LinearGradient
-                colors={["#F97316", "#290000"]}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 0, y: 1 }}
-                className="p-6 items-center relative"
-              >
-                <Text className="text-white text-3xl font-bold mt-6 mb-6 text-center">
-                  My Profile
+          <LinearGradient
+            colors={["#EFF4FC", "#FCC6AB"]}
+            start={{ x: 0.5, y: 0 }}
+            end={{ x: 0.5, y: 1 }}
+            className="w-full rounded-3xl overflow-hidden p-6"
+          >
+            <Text className="text-3xl font-bold text-center text-gray-900 mb-10">
+              My Profile
+            </Text>
+
+            <View className="items-center mb-10">
+              <Image
+                source={require("@/assets/images/profile/profile-smile.png")}
+                className="w-40 h-40 rounded-full"
+                resizeMode="contain"
+              />
+            </View>
+
+            <ProfileInfo label="Subscription" value="Active" />
+            <View className="border-t border-gray-400 my-2" />
+
+            <ProfileInfo
+              label="Your ID"
+              value={isLoading ? "Loading..." : profileData?.id}
+            />
+            <View className="border-t border-gray-400 my-2" />
+
+            <ProfileInfo
+              label="School Name"
+              value={isLoading ? "Loading..." : profileData?.schoolName}
+            />
+            <View className="border-t border-gray-400 my-2" />
+
+            <ProfileInfo label="Account Type" value="Owner" />
+            <View className="border-t border-gray-400 my-2" />
+
+            <TouchableOpacity
+              className="mt-6 w-full items-center"
+              onPress={handleLogout}
+            >
+              <View className="bg-[#F97316] py-2 px-4 rounded-full w-[140px] h-[45px] items-center justify-center">
+                <Text className="text-white text-lg font-semibold">
+                  Log Out
                 </Text>
-                <View className="items-center justify-center w-full">
-                  <View className="relative w-40 h-40 mb-6 items-center justify-center">
-                    <Image
-                      source={require("@/assets/images/profile-kitty.png")}
-                      className="w-40 h-40 rounded-full"
-                      resizeMode="contain"
-                    />
-                  </View>
-                </View>
-
-                <ProfileInfo
-                  label="Subscribed Class"
-                  value={isLoading ? "Loading..." : profileData?.generatedType}
-                />
-                <View className="w-full h-[1px] bg-white/20 my-4" />
-
-                <ProfileInfo
-                  label="Your ID"
-                  value={isLoading ? "Loading..." : profileData?.id}
-                />
-                <View className="w-full h-[1px] bg-white/20 my-4" />
-
-                <ProfileInfo
-                  label="School Name"
-                  value={isLoading ? "Loading..." : profileData?.schoolName}
-                />
-
-                <TouchableOpacity
-                  className="mt-6 w-full items-center"
-                  onPress={handleLogout}
-                >
-                  <View className="bg-[#F97316] py-1 px-4 rounded-full w-[118px] h-[45px] flex-row items-center justify-center mb-8">
-                    <Image
-                      source={require("@/assets/images/profile-icon.png")}
-                      className="w-5 h-5 mr-2 ml-2"
-                      resizeMode="contain"
-                    />
-                    <Text className="text-white text-lg font-semibold mr-2">
-                      Log Out
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              </LinearGradient>
-            </ScrollView>
-          </View>
+              </View>
+            </TouchableOpacity>
+          </LinearGradient>
         </View>
 
-        <View className="mt-10 px-5">
-          <View className="mt-6 flex items-center">
-            <Image
-              source={require("@/assets/images/profile-kids.png")}
-              className="w-[480px] h-[480px]"
-              resizeMode="contain"
-            />
-          </View>
+        <View className="mt-16 px-5">
+          <Text className="text-center text-3xl font-bold text-gray-800 mb-4">
+            Need Help?
+          </Text>
+          <Text className="text-left text-base font-medium">
+            Have questions? Check out our FAQs or contact Customer Support for
+            quick assistance.
+          </Text>
 
-          <View className="mt-10 h-20 bg-white p-6 w-full">
-            <Text></Text>
+          <View className="mt-10 space-y-4">
+            <TouchableOpacity
+              onPress={() => Linking.openURL("https://wa.me/919782222212")}
+            >
+              <View className="flex-row items-start space-x-3 px-4">
+                <MaterialIcons name="phone" size={22} color="#F97316" />
+                <Text className="text-lg ml-4 font-medium">
+                  +91-97822 22212
+                </Text>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => Linking.openURL("mailto:support@dolewrite.com")}
+            >
+              <View className="flex-row items-start space-x-3 px-4">
+                <MaterialIcons className = "mt-4" name="email" size={22} color="#F97316" />
+                <Text className="text-lg ml-4 mt-4 font-medium">
+                  support@dolewrite.com
+                </Text>
+              </View>
+            </TouchableOpacity>
+
+            <View className="flex-row items-start space-x-3 px-4">
+              <MaterialIcons className = "mt-4" name="location-on" size={24} color="#F97316" />
+              <Text className="text-lg ml-4 mt-4 font-medium">
+                B3 Shankar Bhawan, Govind Marg, Raja park (Jaipur)
+              </Text>
+            </View>
+
+            <View className="items-center">
+              <Image
+                source={require("@/assets/images/profile/book.png")}
+                className="w-[360px] h-[360px]"
+                resizeMode="contain"
+              />
+            </View>
           </View>
         </View>
       </ScrollView>

@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+} from "react-native";
 import {
   PanGestureHandler,
   PanGestureHandlerGestureEvent,
@@ -9,26 +15,8 @@ import Svg, { Path, Circle } from "react-native-svg";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const COLORS = [
-  "black",
-  "white",
-  "gray",
-  "red",
-  "blue",
-  "green",
-  "yellow",
-  "orange",
-  "purple",
-  "pink",
-  "brown",
-  "teal",
-  "cyan",
-  "indigo",
-  "lime",
-  "maroon",
-  "navy",
-  "olive",
-  "gold",
-  "coral",
+  "black", "white", "gray", "red", "blue", "green", "yellow", "orange", "purple", "pink",
+  "brown", "teal", "cyan", "indigo", "lime", "maroon", "navy", "olive", "gold", "coral",
 ];
 
 type DrawnPath = {
@@ -45,6 +33,7 @@ const Draw = () => {
   const [eraserPos, setEraserPos] = useState<{ x: number; y: number } | null>(
     null
   );
+
   const onGestureEvent = (event: PanGestureHandlerGestureEvent) => {
     const { x, y, state } = event.nativeEvent;
 
@@ -84,52 +73,59 @@ const Draw = () => {
 
   return (
     <GestureHandlerRootView>
-      <View className="">
+      <View className="mb-10">
         <Image
           source={require("@/assets/images/bg.png")}
           className="absolute w-full"
           resizeMode="cover"
-          alt="linear gradient background with white lines"
+          alt="background"
         />
+
         <View className="mt-16 px-5">
-          <View
-            className="bg-[#FFF2E9] rounded-3xl p-4 mb-4"
-            style={{ height: "18%" }}
-          >
+          {/* Tools */}
+          <View className="bg-[#FFF2E9] rounded-3xl p-4 mb-4" style={{ height: "19%" }}>
             <TouchableOpacity
-              className="mb-4 px-4 py-1 roun rounded-full"
+              className="mb-4 px-4 py-1 rounded-full"
               style={{ borderWidth: 1, borderColor: "black", width: "100%" }}
               onPress={toggleEraser}
             >
               <Text>{isErasing ? "Eraser On" : "Eraser Off"}</Text>
             </TouchableOpacity>
-            <View
-              style={{ flexDirection: "row" }}
-              className="flex-1 flex-wrap gap-1 justify-between"
-            >
+
+            {/* Color Picker */}
+            <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
               {COLORS.map((color) => (
                 <TouchableOpacity
                   key={color}
-                  style={[
-                    {
-                      width: 30,
-                      height: 30,
-                      borderRadius: 15,
-                      backgroundColor: color,
-                      borderWidth:
-                        selectedColor === color && !isErasing ? 2 : 0,
-                      borderColor: "#000",
-                    },
-                  ]}
+                  style={{
+                    width: "10%", // 10 items per row
+                    aspectRatio: 1,
+                    padding: 4,
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
                   onPress={() => {
                     setSelectedColor(color);
                     setIsErasing(false);
                   }}
-                />
+                >
+                  <View
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      borderRadius: 50,
+                      backgroundColor: color,
+                      borderWidth:
+                        selectedColor === color && !isErasing ? 2 : 0,
+                      borderColor: "#000",
+                    }}
+                  />
+                </TouchableOpacity>
               ))}
             </View>
           </View>
 
+          {/* Clear Button */}
           <View className="mb-4">
             <TouchableOpacity
               className="bg-primary rounded-full"
@@ -138,6 +134,8 @@ const Draw = () => {
               <Text className="text-white px-4 py-2">Clear Canvas</Text>
             </TouchableOpacity>
           </View>
+
+          {/* Drawing Canvas */}
           <PanGestureHandler
             onGestureEvent={onGestureEvent}
             onHandlerStateChange={onGestureEvent}
@@ -170,7 +168,6 @@ const Draw = () => {
                   />
                 ) : null}
 
-                {/* Eraser Preview */}
                 {isErasing && eraserPos && (
                   <Circle
                     cx={eraserPos.x}
