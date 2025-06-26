@@ -41,6 +41,12 @@ export default function RootLayout() {
             headerShown: false,
           }}
         />
+        <Stack.Screen
+          name="free-tier/freelessons"
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack>
     </>
   );
