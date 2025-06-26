@@ -1,12 +1,12 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-const FreeLessons = () => {
+const FreeVideo = () => {
   return (
     <View>
-      <Text>FreeLessons</Text>
+      <Text>FreeVideo</Text>
     </View>
   )
 }
 
-export default FreeLessons
+export default FreeVideo

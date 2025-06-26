@@ -3,8 +3,9 @@ import PurchasedCourse from "@/components/purchased-course";
 import { homePageData } from "@/components/carousel";
 import Footer from "@/components/footer";
 import MyCarousel from "@/components/main-carousel";
+import FreeCourses from "./components/free-courses";
 
-export default function Home() {
+const FreeLessons = () => {
   return (
     <View className="bg-white">
       <Image
@@ -21,11 +22,13 @@ export default function Home() {
       >
         <MyCarousel data={homePageData} />
         <Text className="text-2xl font-extrabold mt-4 text-black">
-          Your Courses
+          Available FREE COURSES
         </Text>
-        <PurchasedCourse />
+        <FreeCourses />
         <Footer />
       </ScrollView>
     </View>
   );
-}
+};
+
+export default FreeLessons;

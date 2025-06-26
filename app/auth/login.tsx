@@ -165,7 +165,7 @@ const Login: React.FC<LoginProps> = () => {
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => router.push("/free-tier/freelessons")}
+        onPress={() => router.push("/free-tier/free-lessons")}
         className="bg-[#F97316] w-full py-3 rounded-lg items-center"
       >
         <Text className="text-white font-bold">Watch Free Lessons</Text>
