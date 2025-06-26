@@ -4,13 +4,7 @@ import Carousel from "react-native-reanimated-carousel";
 
 const { width } = Dimensions.get("window");
 
-export default function MyCarousel() {
-  const data = [
-    require("@/assets/images/carousel/one.png"),
-    require("@/assets/images/carousel/two.png"),
-    require("@/assets/images/carousel/three.png"),
-    require("@/assets/images/carousel/four.png"),
-  ];
+export default function MyCarousel({data}:any) {
 
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>

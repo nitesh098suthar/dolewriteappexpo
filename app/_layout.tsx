@@ -42,7 +42,13 @@ export default function RootLayout() {
           }}
         />
         <Stack.Screen
-          name="free-tier/freelessons"
+          name="free-tier/free-lessons"
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="free-tier/videos/[id]"
           options={{
             headerShown: false,
           }}

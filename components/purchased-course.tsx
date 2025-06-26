@@ -1,11 +1,9 @@
-import { View, Text, FlatList, Image, ActivityIndicator } from "react-native";
+import { View, Text, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
 import { httpClient, vimeoHttpClient } from "@/services/api";
 import { Link } from "expo-router";
-import { LinearGradient } from "expo-linear-gradient";
 import SubjectCard from "./subject-card";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Skeleton from "./skeleton";
 import HomePageSkeleton from "./hp-skeleton";
 
 const PurchasedCourse = () => {
@@ -90,7 +88,7 @@ const PurchasedCourse = () => {
     <View>
       {isLoading ? (
         <View style={{ marginTop: 16 }}>
-          <HomePageSkeleton />
+          <HomePageSkeleton onlyCards={false} />
         </View>
       ) : (
         <View>
