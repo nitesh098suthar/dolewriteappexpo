@@ -4,26 +4,32 @@ import { useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import Skeleton from "@/components/skeleton";
 import { WebView } from "react-native-webview";
-
+import { VideoData } from "@/app/course/[id]";
 const FreeVideo = () => {
-  const [currentVideo, setCurrentVideo] = useState();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [currentVideoUrl, setCurrentVideoUrl] = useState<string>("");
+  const [currentVideoData, setCurrentVideoData] = useState<VideoData>();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const { id } = useLocalSearchParams();
   const getCurrentVideo = async () => {
     try {
+      setIsLoading(true);
       const response = await vimeoHttpClient.get(`/videos/${id}`);
-      console.log(response.data);
-      if (response.data) setCurrentVideo(response.data.player_embed_url);
+      if (response.data) {
+        setCurrentVideoData(response.data);
+        setCurrentVideoUrl(response.data.player_embed_url);
+      }
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
   useEffect(() => {
     getCurrentVideo();
   }, []);
   return (
-    <View>
+    <View className="px-5">
       <View style={{ marginBottom: 16 }}>
         {isLoading ? (
           <View className="mt-16">
@@ -31,7 +37,7 @@ const FreeVideo = () => {
             <Skeleton height={40} />
           </View>
         ) : (
-          currentVideo && (
+          currentVideoUrl && (
             <View
               style={{
                 height: 300,
@@ -42,7 +48,7 @@ const FreeVideo = () => {
             >
               <WebView
                 source={{
-                  uri: currentVideo,
+                  uri: currentVideoUrl,
                   headers: {
                     Referer: "https://www.dolewrite.com",
                   },
@@ -51,15 +57,26 @@ const FreeVideo = () => {
                 allowsFullscreenVideo={true}
                 mediaPlaybackRequiresUserAction={false}
               />
-              {/* <Text
+              <Text
                 style={{
                   fontSize: 18,
                   fontWeight: "bold",
-                  marginBottom: 12,
+                  marginTop: 10,
                 }}
               >
-                {lectureName.charAt(0).toUpperCase() + lectureName.slice(1)}
-              </Text> */}
+                {currentVideoData?.name}
+              </Text>
+              <Text
+                style={{
+                  fontSize: 14,
+                  fontWeight: "normal",
+                  marginTop: 6,
+                }}
+              >
+                {currentVideoData?.description
+                  ? currentVideoData.description
+                  : "Video Description Here"}
+              </Text>
             </View>
           )
         )}

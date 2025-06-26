@@ -15,7 +15,7 @@ import { WebView } from "react-native-webview";
 import CourseDetailSkeleton from "@/components/cd-skeleton";
 import Skeleton from "@/components/skeleton";
 
-interface VideoData {
+export interface VideoData {
   player_embed_url: string;
   name: string;
   uri: string;
