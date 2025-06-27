@@ -6,7 +6,7 @@ import {
   Image,
   Alert,
   ActivityIndicator,
-  Linking, // Import ActivityIndicator
+  Linking,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
@@ -24,7 +24,7 @@ const Login: React.FC<LoginProps> = () => {
     undefined
   );
   const [err, setErr] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(true); // Add loading state
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const checkLoggedIn = async () => {
@@ -42,32 +42,36 @@ const Login: React.FC<LoginProps> = () => {
           if (response.data.valid) {
             router.replace("/maintabs/home");
           } else {
-            setLoading(false); // Set loading to false only if not logged in
+            setLoading(false);
           }
         } else {
-          setLoading(false); // Set loading to false only if not logged in
+          setLoading(false);
         }
       } catch (error) {
         console.error("Login check error:", error);
-        setLoading(false); // Set loading to false on error
+        setLoading(false);
       }
     };
 
     checkLoggedIn();
   }, []);
+
   const loginHandler = async () => {
     setErr("");
-    setLoading(true); //start loading when login handler is called.
+    setLoading(true);
+
     if (!loginId || !loginPassword) {
-      setErr("Enter your ID and Password"); // Set the error message
+      setErr("Enter your ID and Password");
       setLoading(false);
       return;
     }
+
     try {
       const response = await httpClient.post("/user/loginapp", {
         id: loginId,
         password: loginPassword,
       });
+
       await AsyncStorage.setItem(
         "userCredentials",
         JSON.stringify({
@@ -75,6 +79,7 @@ const Login: React.FC<LoginProps> = () => {
           password: loginPassword,
         })
       );
+
       console.log(response, "------------res");
       router.replace("/maintabs/home");
     } catch (error: any) {
@@ -87,7 +92,7 @@ const Login: React.FC<LoginProps> = () => {
       } else {
         Alert.alert("Login Error", "An unexpected error occurred");
       }
-      setLoading(false); // stop loading if login fails.
+      setLoading(false);
     }
   };
 
@@ -97,6 +102,7 @@ const Login: React.FC<LoginProps> = () => {
       console.error("An error occurred: ", err)
     );
   };
+
   return (
     <View className="flex-1 bg-white items-center justify-center px-6">
       <View
@@ -113,6 +119,7 @@ const Login: React.FC<LoginProps> = () => {
           style={{ width: "100%", height: "100%" }}
         />
       </View>
+
       <TextInput
         placeholder="Name"
         className="w-full rounded-lg p-3 mb-4 bg-[#F6F7FA]"
@@ -128,21 +135,27 @@ const Login: React.FC<LoginProps> = () => {
         />
         <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)}>
           <Image
-            source={require("@/assets/images/login-hide.png")}
+            source={
+              passwordVisible
+                ? require("@/assets/images/login-show.png") // 👁️ visible
+                : require("@/assets/images/login-hide.png") // 🙈 hidden
+            }
             className="w-5 h-5 mr-4"
             resizeMode="contain"
           />
         </TouchableOpacity>
       </View>
+
       {err !== "" && (
         <View style={{ width: "100%" }}>
           <Text className="text-sm text-red-600 pt-2 pl-2">{err}</Text>
         </View>
       )}
+
       <TouchableOpacity
         className="bg-[#F97316] w-full py-3 rounded-lg mb-4 items-center mt-6"
         onPress={loginHandler}
-        disabled={loading} // Optional: prevent multiple presses
+        disabled={loading}
       >
         {loading ? (
           <ActivityIndicator size="small" color="#fff" />
