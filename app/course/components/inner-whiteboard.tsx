@@ -66,7 +66,7 @@ const InnerWhiteboard = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.button} onPress={toggleWhiteboard}>
-        <Text style={styles.buttonText}>InnerWhiteboard</Text>
+        <Text style={styles.buttonText}>Whiteboard</Text>
       </TouchableOpacity>
 
       {showWhiteboard && (
