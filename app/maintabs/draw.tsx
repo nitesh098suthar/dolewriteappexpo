@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  StyleSheet,
 } from "react-native";
 import {
   PanGestureHandler,
@@ -15,8 +16,26 @@ import Svg, { Path, Circle } from "react-native-svg";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const COLORS = [
-  "black", "white", "gray", "red", "blue", "green", "yellow", "orange", "purple", "pink",
-  "brown", "teal", "cyan", "indigo", "lime", "maroon", "navy", "olive", "gold", "coral",
+  "black",
+  "white",
+  "gray",
+  "red",
+  "blue",
+  "green",
+  "yellow",
+  "orange",
+  "purple",
+  "pink",
+  "brown",
+  "teal",
+  "cyan",
+  "indigo",
+  "lime",
+  "maroon",
+  "navy",
+  "olive",
+  "gold",
+  "coral",
 ];
 
 type DrawnPath = {
@@ -83,7 +102,10 @@ const Draw = () => {
 
         <View className="mt-16 px-5">
           {/* Tools */}
-          <View className="bg-[#FFF2E9] rounded-3xl p-4 mb-4" style={{ height: "19%" }}>
+          <View
+            className="bg-[#FFF2E9] rounded-3xl p-4 mb-4"
+            style={{ height: "19%" }}
+          >
             <TouchableOpacity
               className="mb-4 px-4 py-1 rounded-full"
               style={{ borderWidth: 1, borderColor: "black", width: "100%" }}
@@ -93,7 +115,7 @@ const Draw = () => {
             </TouchableOpacity>
 
             {/* Color Picker */}
-            <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+            <View style={styles.container}>
               {COLORS.map((color) => (
                 <TouchableOpacity
                   key={color}
@@ -188,3 +210,21 @@ const Draw = () => {
 };
 
 export default Draw;
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    padding: 2,
+    overflow: "hidden",
+  },
+  box: {
+    width: "48%",
+    height: 100,
+    backgroundColor: "#ddd",
+    marginBottom: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});

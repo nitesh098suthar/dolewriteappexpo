@@ -1,6 +1,7 @@
 import { View, ScrollView, Image, Text } from "react-native";
 import React from "react";
 import CourseList from "@/components/course-list";
+import { Link } from "expo-router";
 
 const Course = () => {
   return (
@@ -33,8 +34,18 @@ const Course = () => {
         </View>
 
         {/* Left-Aligned Heading */}
-        <Text className="text-2xl font-extrabold mt-4">All Available Courses</Text>
-
+        <Text className="text-2xl font-extrabold mt-4">
+          All Available Courses
+        </Text>
+        <Text className="text-lg my-1">
+          <Text>Watch </Text>
+          <Link
+            className="text-primary underline"
+            href={"/free-tier/free-lessons"}
+          >
+            Free Courses
+          </Link>{" "}
+        </Text>
         {/* Course List */}
         <View>
           <CourseList courseName="Nursery" folderId="22761499" />

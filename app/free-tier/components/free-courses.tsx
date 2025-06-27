@@ -68,7 +68,21 @@ const FreeCourses = () => {
         </View>
       ) : (
         <View>
-          {loggedInUser ? <Text>logged In</Text> : <Text>Not logged in</Text>}
+          {loggedInUser ? (
+            <Text className="text-lg my-1">
+              Watch{" "}
+              <Link className="text-primary underline" href={"/"}>
+                Premium Courses
+              </Link>
+            </Text>
+          ) : (
+            <Text className="text-lg my-1">
+              <Link className="text-primary underline" href={"/auth/login"}>
+                Login
+              </Link>{" "}
+              to access Premium Courses.
+            </Text>
+          )}
 
           <FlatList
             data={freeCourseVideos}
