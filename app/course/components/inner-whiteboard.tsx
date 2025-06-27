@@ -146,6 +146,7 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     borderWidth: 1,
     marginBottom: 10,
+    borderRadius: 10,
   },
   clearButton: {
     borderWidth: 2,
