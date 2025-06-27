@@ -14,6 +14,7 @@ import { vimeoHttpClient } from "@/services/api";
 import { WebView } from "react-native-webview";
 import CourseDetailSkeleton from "@/components/cd-skeleton";
 import Skeleton from "@/components/skeleton";
+import InnerWhiteboard from "./components/inner-whiteboard";
 
 export interface VideoData {
   player_embed_url: string;
@@ -150,7 +151,9 @@ const Lessons = () => {
             )
           )}
         </View>
-
+        <View>
+          <InnerWhiteboard />
+        </View>
         <View
           style={{ backgroundColor: "#F6F6F6", padding: 16, borderRadius: 8 }}
         >
