@@ -20,10 +20,10 @@ interface ProfileInfoProps {
 
 const ProfileInfo = ({ label, value }: ProfileInfoProps) => (
   <View className="w-full items-center justify-center px-4 mb-4">
-    <Text className="text-gray-800 text-xl font-semibold mb-1 text-center">
+    <Text className="text-white text-xl font-semibold mb-1 text-center">
       {label}
     </Text>
-    <Text className="text-gray-600 text-base text-center">
+    <Text className="text-white text-base text-center">
       {value || "N/A"}
     </Text>
   </View>
@@ -82,12 +82,12 @@ const Profile = () => {
       >
         <View className="items-center justify-center">
           <LinearGradient
-            colors={["#EFF4FC", "#FCC6AB"]}
+            colors={["#F97316", "#290000"]}
             start={{ x: 0.5, y: 0 }}
             end={{ x: 0.5, y: 1 }}
             className="w-full rounded-3xl overflow-hidden p-6"
           >
-            <Text className="text-3xl font-bold text-center text-gray-900 mb-10">
+            <Text className="text-3xl font-bold text-center text-white mb-10">
               My Profile
             </Text>
 
@@ -100,22 +100,22 @@ const Profile = () => {
             </View>
 
             <ProfileInfo label="Subscription" value="Active" />
-            <View className="border-t border-gray-400 my-2" />
+            <View className="border-t border-white my-2" />
 
             <ProfileInfo
               label="Your ID"
               value={isLoading ? "Loading..." : profileData?.id}
             />
-            <View className="border-t border-gray-400 my-2" />
+            <View className="border-t border-white my-2" />
 
             <ProfileInfo
               label="School Name"
               value={isLoading ? "Loading..." : profileData?.schoolName}
             />
-            <View className="border-t border-gray-400 my-2" />
+            <View className="border-t border-white my-2" />
 
             <ProfileInfo label="Account Type" value="Owner" />
-            <View className="border-t border-gray-400 my-2" />
+            <View className="border-t border-white my-2" />
 
             <TouchableOpacity
               className="mt-6 w-full items-center"

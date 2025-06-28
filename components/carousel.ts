@@ -1,8 +1,8 @@
 export const homePageData = [
-  require("@/assets/images/carousel/one.png"),
-  require("@/assets/images/carousel/two.png"),
-  require("@/assets/images/carousel/three.png"),
-  require("@/assets/images/carousel/four.png"),
+  require("@/assets/images/carousel/1.png"),
+  require("@/assets/images/carousel/2.png"),
+  require("@/assets/images/carousel/3.png"),
+  require("@/assets/images/carousel/4.png"),
 ];
 export const freeTierData = [
   require("@/assets/images/free-tier-carousel/one.png"),

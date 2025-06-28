@@ -64,7 +64,7 @@ const Lessons = () => {
     };
 
     fetchingSubjectData();
-    loadCompletedLectures(); // Load completed lectures for this subject
+    loadCompletedLectures();
   }, [id]);
 
   const loadCompletedLectures = async () => {
@@ -155,7 +155,12 @@ const Lessons = () => {
           <InnerWhiteboard />
         </View>
         <View
-          style={{ backgroundColor: "#F6F6F6", padding: 16, borderRadius: 8 }}
+          style={{
+            backgroundColor: "#F9FBFF",
+            padding: 16,
+            borderRadius: 8,
+            marginBottom: 36,
+          }}
         >
           <Text style={{ fontSize: 18, fontWeight: "bold", marginBottom: 20 }}>
             Lessons
@@ -167,10 +172,14 @@ const Lessons = () => {
               marginBottom: 8,
             }}
           >
-            <Text style={{ fontSize: 14, marginBottom: 4, fontWeight: "bold" }}>
+            <Text
+              style={{ fontSize: 14, marginBottom: 4, fontWeight: "bold" }}
+            >
               Mark If Completed
             </Text>
-            <Text style={{ fontSize: 14, marginBottom: 4, fontWeight: "bold" }}>
+            <Text
+              style={{ fontSize: 14, marginBottom: 4, fontWeight: "bold" }}
+            >
               Assessment
             </Text>
           </View>
@@ -188,13 +197,17 @@ const Lessons = () => {
                   marginBottom: 8,
                 }}
               >
-                {/* Video Title Button */}
                 <TouchableOpacity
                   style={[
-                    { flex: 1, padding: 12, borderRadius: 8, marginRight: 8 },
+                    {
+                      flex: 1,
+                      padding: 12,
+                      borderRadius: 8,
+                      marginRight: 8,
+                    },
                     activeVideoIndex === index
                       ? { backgroundColor: "#F97316" }
-                      : { backgroundColor: "#D9D9D9" },
+                      : { backgroundColor: "#FFFFFF" },
                   ]}
                   onPress={() =>
                     handleVideoTitleClick(
@@ -206,10 +219,7 @@ const Lessons = () => {
                   }
                 >
                   <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    {/* Checkbox */}
-                    <TouchableOpacity
-                      onPress={() => handleCheckboxClick(index)}
-                    >
+                    <TouchableOpacity onPress={() => handleCheckboxClick(index)}>
                       <View
                         style={{
                           width: 18,
@@ -226,21 +236,31 @@ const Lessons = () => {
                         }}
                       >
                         {completedLectures.includes(index) && (
-                          <Text style={{ color: "green", fontWeight: "bold" }}>
+                          <Text
+                            style={{ color: "green", fontWeight: "bold" }}
+                          >
                             ✔
                           </Text>
                         )}
                       </View>
                     </TouchableOpacity>
 
-                    <Text className="text-white font-bold">
+                    <Text
+                      style={{
+                        color:
+                          activeVideoIndex === index
+                            ? "#FFFFFF"
+                            : "#FF7401", // Primary text
+                        fontWeight: "600",
+                        fontSize: 14,
+                      }}
+                    >
                       {video?.name.charAt(0).toUpperCase() +
                         video?.name.slice(1)}
                     </Text>
                   </View>
                 </TouchableOpacity>
 
-                {/* Assessment Button */}
                 <TouchableOpacity
                   className="bg-primary"
                   style={{
