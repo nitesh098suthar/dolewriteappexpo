@@ -250,7 +250,7 @@ const Lessons = () => {
                         color:
                           activeVideoIndex === index
                             ? "#FFFFFF"
-                            : "#FF7401", // Primary text
+                            : "#FF7401",
                         fontWeight: "600",
                         fontSize: 14,
                       }}
